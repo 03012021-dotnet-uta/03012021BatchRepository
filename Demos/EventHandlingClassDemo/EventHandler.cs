@@ -14,11 +14,11 @@ namespace EventHandlingClassDemo
         //this event is the newer syntax. It's a combination of the 2 steps above.
         public event EventHandler<SentenceEventArgs> UIEvent;
 
-        private void OnUserInput(/*File file*/)
+        private void OnUserInput()
         {
             if (UIEvent != null)
             {
-                UIEvent(this, new SentenceEventArgs() { UiSentence = "This" });
+                UIEvent(this, new SentenceEventArgs() { UiSentence = "This " });
             }
         }
 

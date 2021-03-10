@@ -14,7 +14,7 @@ namespace EventHandlingClassDemo
             UiEvent.UIEvent += uiw2.OnUserInput;
             UiEvent.UIEvent += uiw2.OnUserInput2;
 
-            // UiEvent.UIEvent -= uiw2.OnUserInput;
+            UiEvent.UIEvent -= uiw2.OnUserInput;
 
             //do things....
 
