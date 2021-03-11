@@ -30,7 +30,7 @@ LastOrderDate date NULL,
 Remarks varchar(250) NULL);
 
 CREATE TABLE Orders(
-OrderId INT PRIMARY KEY IDENTITY NOT NULL,
+OrderId INT PRIMARY KEY IDENTITY,
 CustomerID INT NOT NULL FOREIGN KEY REFERENCES Customers(CustomerId) ON DELETE CASCADE,
 OrderDate date NOT NULL,
 totalAmount float NOT NULL);
