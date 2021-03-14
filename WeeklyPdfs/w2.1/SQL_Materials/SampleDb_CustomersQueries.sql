@@ -10,7 +10,7 @@ INSERT INTO Customers (firstName, lastName, addressID, lastOrderDate, remarks)
 VALUES ('Hugo', 'Sanchez', 2, '2025-5-5', 'This can''t be correct correct?');
 
 INSERT INTO Customers (firstName, lastName, addressID, lastOrderDate, remarks)
-VALUES ('Jeff', 'Goldblum', 2, '2025-5-5', 'Can you say that this query hasn''t had an escape.');
+VALUES ('Jeff', 'Goldblum', 2, '2025-5-5', 'Can you say that this query hasn''t had an escape?');
 
 DELETE FROM Customers
 WHERE firstName = 'Hugo';

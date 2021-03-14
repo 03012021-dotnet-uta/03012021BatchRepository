@@ -1,4 +1,6 @@
 
+--rename table using the Built-in Stored Procedure
+EXEC sp_rename 'Customers', 'Customers_1';
 
 --Simple Stored Procedure
 CREATE PROCEDURE GetAllCustomerNames
