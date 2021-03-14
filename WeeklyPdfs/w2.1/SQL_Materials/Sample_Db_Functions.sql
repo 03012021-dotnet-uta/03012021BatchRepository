@@ -1,4 +1,4 @@
---- Scalar 
+--- Scalar Functions
 CREATE FUNCTION dbo.GetNetSale(
 	@quantity INT,	
 	@unitprice dec(10,2),
