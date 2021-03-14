@@ -1,6 +1,10 @@
--- Scalar 
+
+-- Scalar Functions
 -- takes the 3 parameters and multiplies them. It returns the total price.
-CREATE FUNCTION dbo.GetNetSale( @quantity INT,@unitprice dec(10,2),@discount dec(10,2) )
+CREATE FUNCTION dbo.GetNetSale( 
+  @quantity INT,
+  @unitprice dec(10,2),
+  @discount dec(10,2) )
 RETURNS dec(10,2)
 as 
 begin
