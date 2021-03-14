@@ -11,7 +11,7 @@ namespace DbFirstDemo
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            using (var dbContext = new Sample_DBTestContext())
+            using (Sample_DBTestContext dbContext = new Sample_DBTestContext())
             {
                 // List<Customer> customers = dbContext.Customers.Include("Address").ToList();
                 List<Customer> customers = dbContext.Customers.Include(a => a.Address).ToList();
