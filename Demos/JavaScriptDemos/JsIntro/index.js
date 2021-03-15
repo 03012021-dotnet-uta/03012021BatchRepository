@@ -204,3 +204,42 @@ console.log(a !== b); //false
 console.log(a === b); //true
 console.log(a == c);  //falsy
 
+console.log(String(53));
+let x;
+console.log(Number(x));
+console.log(Number(false));
+console.log(Number(true));
+console.log(Number(''));
+console.log(Number('13'));
+console.log(Number('thirteen'));
+console.log(Boolean('thirteen'));
+if ('thirteen'){
+  console.log('a string evaluates to true')
+}
+
+console.log(Math.sqrt(100));
+console.log(Math.max(100, 5432, 51, 2132));
+console.log(Math.cbrt(100));
+console.log(Math.PI);
+
+//a Map is a key:value pair..like a Dictionary in C#
+// the keys must be unique
+let myMap = new Map();
+myMap.set('Mark', 41);
+myMap.set('chicken', 'cluck');
+myMap.set('Hope', 14);
+myMap.set('Mark', 10);
+
+// alert(myMap.get('Mark'));
+myMap.forEach((value, key) => {
+  console.log(`The key is ${key} and the value is ${value}`)
+})
+
+let myObjStringified = JSON.stringify(myObject);
+console.log(myObjStringified.toUpperCase());
+console.log(myObjStringified);
+console.log(typeof myObjStringified);
+let myObjParsed = JSON.parse(myObjStringified);
+console.log(myObjParsed);
+
+
