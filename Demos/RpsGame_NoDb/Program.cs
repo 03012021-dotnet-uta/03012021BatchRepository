@@ -6,7 +6,7 @@ namespace RpsGame_NoDb
 {
     class Program
     {
-        static RpsGameRepositoryLayer gameContext = new RpsGameRepositoryLayer(); // create the context here to acceess it in all methods of this class
+        static RpsGameRepositoryLayer gameContext = new RpsGameRepositoryLayer(); // create the "context" here to acceess it in all methods of this class
         static int numberOfChoices = Enum.GetNames(typeof(Choice)).Length;
         static void Main(string[] args)
         {
