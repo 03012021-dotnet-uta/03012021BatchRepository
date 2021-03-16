@@ -1,0 +1,12 @@
+Source - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/tools/dotnet-aspnet-codegenerator?view=aspnetcore-5.0Code generator commands
+
+
+
+- Create a new Controller - 
+dotnet aspnet-codegenerator controller -name PropertyCategoryManager -outDir Controllers
+
+- Create a View - 
+dotnet aspnet-codegenerator view Index List --model ProductCategory -outDir Views/ProductCategoryManager
+...			...view <nameOfView> <templateType> --model <nameOfModel> -outDir <relativePathToPutTheNewView>
+
+
