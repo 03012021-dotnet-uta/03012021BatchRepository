@@ -242,4 +242,155 @@ console.log(typeof myObjStringified);
 let myObjParsed = JSON.parse(myObjStringified);
 console.log(myObjParsed);
 
+function names(fName, lName, choice = true) {
+  function fullName() {
+    return `The full name is ${fName} ${lName}`;
+  }
+
+  function fullNameReverse() {
+    return `The full name reversed is ${lName} ${fName}`;
+  }
+
+  if (choice) { console.log(fullName()); }
+  else { console.log(fullNameReverse()); }
+}
+
+names('Mark','Moore',false);
+// fullName();// you cannot call this function becaues it's out of scope.
+
+/**Lexical Environment example
+ * THe function returned from counter() 
+ * still has access to the number variable inside 
+ * counter().
+ * This means that the return of conter() IS the function
+ * and can be invoked also to get the current 
+ * value of the variable from inside counter()
+ */
+function counter() {
+  let counterNum = 0;
+
+  return function () {
+    return ++counterNum;
+  }
+}
+
+let counterReturned = counter();
+console.log(counterReturned());
+console.log(counterReturned());
+console.log(counterReturned());
+console.log(counterReturned());
+
+/**another example */
+function makeAdder(x=4) {
+  return function (y) {
+    return x + y;
+  }
+}
+
+let add5 = makeAdder();
+let resultAdd6 = add5(6);
+console.log(resultAdd6);
+
+let user = {
+  name: 'Mark',
+  location: "myRoom",
+  stats: {
+    height: 185,
+    weight: 85
+  }
+};
+
+console.log(user.name);
+console.log(user.stats.height);
+
+user.favColor = 'blue';
+console.log(user.favColor);
+console.log(user);
+let exists = user.shoeSize in user;
+console.log(exists);
+if (exists) {
+  console.log(`YES shoeSize in the object`)
+}
+else {
+  console.log(`NO, shoesize does not exist in the object`)
+}
+
+for (let key in user){
+  console.log(key, ' space ' + user[key]);
+}
+
+function people(name) {
+  this.name = name;
+  this.city;
+}
+
+let mark = new people('Mark-sa-lot');
+console.log(mark.name);
+mark.city = 'Monterrey';
+console.log(mark.city);
+
+let maya = new people('yaya');
+console.log(maya.name);
+maya.city = 'Crowley';
+console.log(maya.city);
+
+
+/**below is classes with inheritance. 
+ * Make sure to call the super() class in the 
+ * constructor before setting local class properties.
+ */
+class Shape{
+  constructor(description){
+    this.description = description;
+  }
+};
+
+class Rectangle /*extends Shape*/ {
+  constructor(height,desc, width) {
+    // super(desc);
+    this.height = height;
+    this.width = width;
+  }
+
+  getArea() {
+    if (this.height < 0) {
+      return 'The height is negative';
+    }
+    else return this.calcArea();
+  }
+
+  calcArea() {
+    return this.height * this.width;
+  }
+}
+
+/**you can use the setPrototypeOf() to manually set a super class.
+This means you will need to also manually add the 
+properties of that derived class */
+let rect1 = Object.setPrototypeOf(Rectangle, Shape);
+let rect = new Rectangle(-1, 8);
+rect1.description = 'This rectangle inherits from Shape.';
+rect1.height = 1;
+rect1.width = 2;
+rect1.calcArea =   function() {
+  return this.height * this.width;
+};
+rect1.getArea =   function() {
+  if (this.height < 0) {
+    return 'The height is negative';
+  }
+  else return this.calcArea();
+};
+console.log(rect1.height, rect1.width, Rectangle.name, rect1.calcArea(), rect1.getArea(), rect1.description);
+
+let myString = 'This is a string';
+let sliced = myString.slice(5, 11);
+console.log(sliced);
+console.log(myString);
+let first = myString.split(' ', 1);
+let second = myString.split(' ', 3);
+console.log(first);
+console.log(second);
+
+
 
