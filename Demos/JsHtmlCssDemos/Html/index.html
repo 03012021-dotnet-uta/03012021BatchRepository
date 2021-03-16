@@ -1,0 +1,87 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marks BIG HTML Demo</title>
+</head>
+
+<body>
+  <p style="background-color: pink;">This is a paragraph</p><br><br>
+  This is text withough a tag
+  <p>Mark is
+  <div>very</div> grumpy</p><br>
+  <b>this is bold</b><br>
+  <i>this is italic</i><br>
+  <del>deleted text</del><br>
+  <sub>subscript</sub><br>
+
+
+
+  <h2 id="id1" title="title1" class="class1 class2">this is a class</h2>
+
+  <a href="http://revature.com" style="color: pink;" target="blank">Link to Revature</a>
+
+
+  <ul>
+    <li>bullet 1</li>
+    <li>bullet 2</li>
+  </ul>
+
+  <ol>
+    <li>number 1</li>
+    <li>number 2</li>
+  </ol>
+
+
+  <table class="table1">
+    <thead class="tableHead1">
+      <th class="thead1">PersonId</th>
+      <th class="thead1">Name</th>
+      <th class="thead1">city</th>
+      <th class="thead1">Profession</th>
+    </thead>
+    <tbody class="tbody1">
+      <tr class="trow1">1</tr>
+      <tr class="trow1">Mark</tr>
+      <tr class="trow1">Burleson</tr>
+      <tr class="trow1">SE Instructor</tr>
+    </tbody>
+  </table>
+
+  <form action="functionName()" method="get">
+    <div class="nameInputDiv">
+      <label for="fname">First Name:</label>
+      <input type="text" class="nameInput" name="fname" id="fnameId" placeholder="First Name" autofocus>
+      <!--autofocus stayson the first instance of the autofocus keyword.-->
+    </div>
+    <div class="nameInputDiv">
+      <label for="fname">Last Name:</label>
+      <input type="text" class="nameInput" name="lname" id="lnameId" autofocus placeholder="Last Name">
+    </div>
+    <div>
+      <label for="color">Pick a Color</label>
+      <input type="hidden" name="colorPicker" id="colorPickerId">
+      <!-- get the value of a input field with => event.coloPicker.value-->
+    </div>
+    <button type="submit">Submit Button</button>
+  </form>
+
+  <select name="select" id="selectId">
+    <option value="1">&lt; greater than</option>
+    <option value="2" selected>&gt; less than</option>
+    <option value="3">&#xFFE0;</option>
+  </select>
+
+
+
+
+
+
+
+
+  <script src="../JsIntro/index.js"></script>
+</body>
+
+</html>
