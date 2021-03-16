@@ -7,5 +7,5 @@ INSERT INTO Addresses
 VALUES ('432 Millbrook Ln.', 'Crowley', 'CY');
 
 --CROSS JOIN
-SELECT Addresses.Addressid, AddressLine1, FirstName
+SELECT Addresses.Addressid, AddressLine1, FirstName, LastName
 FROM Addresses CROSS JOIN Customers;

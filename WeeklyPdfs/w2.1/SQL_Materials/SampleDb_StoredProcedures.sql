@@ -2,7 +2,8 @@
 --rename table using the Built-in Stored Procedure
 EXEC sp_rename 'Customers', 'Customers_1';
 
---Simple Stored Procedure
+
+--Stored Procedure to get all Customers with addressId = 1
 CREATE PROCEDURE GetAllCustomerNames
 AS 
 SELECT CustomerId, FirstName 
@@ -13,8 +14,9 @@ EXEC GetAllCustomerNames;
 DROP PROCEDURE GetAllCustomerNames;
 
 
---Stored Procedure with variables
-CREATE PROCEDURE GetCustomerShe
+--Stored Procedure with variables to get a Customer with the param names
+CREATE PROCEDURE GetCustomerShe   
+
     @LastName nvarchar(50),   
     @FirstName nvarchar(50)   
 AS     
