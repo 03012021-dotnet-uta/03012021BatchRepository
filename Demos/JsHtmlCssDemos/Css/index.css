@@ -1,0 +1,62 @@
+.class1{
+  background-color:blueviolet ;
+  width: 90px;
+  padding: 30px 30px 30px 30px;
+  border: 30px solid green;
+  margin: 30px;
+}
+
+/* select every class theard inside a table */
+table .thead1{
+  width: 100;
+  padding-bottom: 10px;
+  text-align: right;
+  color: blueviolet;
+} 
+
+/* select the head and rows with these  */
+table .thead1, table .tbody1{
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* bring all the borders together */
+table{
+  border-collapse: collapse;
+}
+
+/* choose a table with class table1 and id table1Id 
+and apply this styling when hovering */
+table#tableId.table1:hover{
+  background-color: aqua;
+}
+
+/* choose every td that is the 2nd child of 
+it's parent */
+td:nth-child(2):hover{
+  font-variant: small-caps;
+}
+
+/* every odd numbered child  tr */
+tr:nth-child(odd){
+  background-color: beige;
+}
+
+/* td:nth-child(odd):hover{
+  background-color: inherit;
+} */
+
+tr.trow1:hover{
+  background-color: aqua;
+}
+
+/* give the table some breathing room */
+.divTableClass{
+  margin: 20px;
+}
+
+
+
+
+
+
