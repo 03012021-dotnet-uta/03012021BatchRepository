@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Css/index.css">
   <title>Marks BIG HTML Demo</title>
 </head>
 
@@ -19,69 +20,107 @@
 
 
 
-  <h2 id="id1" title="title1" class="class1 class2">this is a class</h2>
+  <h6 id="id1" title="title1" class="class1 class2">this is a class</h2>
 
-  <a href="http://revature.com" style="color: pink;" target="blank">Link to Revature</a>
-
-
-  <ul>
-    <li>bullet 1</li>
-    <li>bullet 2</li>
-  </ul>
-
-  <ol>
-    <li>number 1</li>
-    <li>number 2</li>
-  </ol>
+    <a href="http://revature.com" style="color: pink;" target="blank">Link to Revature</a>
 
 
-  <table class="table1">
-    <thead class="tableHead1">
-      <th class="thead1">PersonId</th>
-      <th class="thead1">Name</th>
-      <th class="thead1">city</th>
-      <th class="thead1">Profession</th>
-    </thead>
-    <tbody class="tbody1">
-      <tr class="trow1">1</tr>
-      <tr class="trow1">Mark</tr>
-      <tr class="trow1">Burleson</tr>
-      <tr class="trow1">SE Instructor</tr>
-    </tbody>
-  </table>
+    <ul class="ulClass">
+      <li>bullet 1</li>
+      <li>bullet 2</li>
+      <li>bullet 3</li>
+      <li>bullet 4</li>
+      <li>bullet 5</li>
+      <li>bullet 6</li>
+    </ul>
 
-  <form action="functionName()" method="get">
-    <div class="nameInputDiv">
-      <label for="fname">First Name:</label>
-      <input type="text" class="nameInput" name="fname" id="fnameId" placeholder="First Name" autofocus>
-      <!--autofocus stayson the first instance of the autofocus keyword.-->
+    <ol id="olId">
+      <li>number 1</li>
+      <li>number 2</li>
+      <li>number 3</li>
+      <li>number 4</li>
+      <li>number 5</li>
+      <li>number 6</li>
+      <li>number 7</li>
+      <li>number 8</li>
+    </ol>
+
+    <div class="divTableClass">
+      <table class="table1" id="tableId">
+        <thead class="tableHead1">
+          <th class="thead1">PersonId</th>
+          <th class="thead1">Name</th>
+          <th class="thead1">City</th>
+          <th class="thead1">Profession</th>
+        </thead>
+        <tbody class="tbody1">
+          <tr class="trow1">
+            <td class="tbody1">1</td>
+            <td class="tbody1">Mark</td>
+            <td class="tbody1">Crowley</td>
+            <td class="tbody1">SE Instructor</td>
+          </tr>
+          <tr class="trow1">
+            <td class="tbody1">2</td>
+            <td class="tbody1">Arely</td>
+            <td class="tbody1">Monterrey</td>
+            <td class="tbody1">Toddler Instructor</td>
+          </tr>
+          <tr class="trow1">
+            <td class="tbody1">3</td>
+            <td class="tbody1">Ethan</td>
+            <td class="tbody1">Euless</td>
+            <td class="tbody1">Percussionist</td>
+          </tr>
+          <tr class="trow1">
+            <td class="tbody1">4</td>
+            <td class="tbody1">Hope</td>
+            <td class="tbody1">Euless</td>
+            <td class="tbody1">Trumpetist</td>
+          </tr>
+          <tr class="trow1">
+            <td class="tbody1">5</td>
+            <td class="tbody1">Maya</td>
+            <td class="tbody1">Crowley</td>
+            <td class="tbody1">EH!</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="nameInputDiv">
-      <label for="fname">Last Name:</label>
-      <input type="text" class="nameInput" name="lname" id="lnameId" autofocus placeholder="Last Name">
-    </div>
-    <div>
-      <label for="color">Pick a Color</label>
-      <input type="hidden" name="colorPicker" id="colorPickerId">
-      <!-- get the value of a input field with => event.coloPicker.value-->
-    </div>
-    <button type="submit">Submit Button</button>
-  </form>
-
-  <select name="select" id="selectId">
-    <option value="1">&lt; greater than</option>
-    <option value="2" selected>&gt; less than</option>
-    <option value="3">&#xFFE0;</option>
-  </select>
 
 
+    <form action="functionName()" method="get">
+      <div class="nameInputDiv">
+        <label for="fname">First Name:</label>
+        <input type="text" class="nameInput" name="fname" id="fnameId" placeholder="First Name" autofocus>
+        <!--autofocus stayson the first instance of the autofocus keyword.-->
+      </div>
+      <div class="nameInputDiv">
+        <label for="fname">Last Name:</label>
+        <input type="text" class="nameInput" name="lname" id="lnameId" autofocus placeholder="Last Name">
+      </div>
+      <div>
+        <label for="color">Pick a Color</label>
+        <input type="hidden" name="colorPicker" id="colorPickerId">
+        <!-- get the value of a input field with => event.coloPicker.value-->
+      </div>
+      <button type="submit">Submit Button</button>
+    </form>
+
+    <select name="select" id="selectId">
+      <option value="1">&lt; greater than</option>
+      <option value="2" selected>&gt; less than</option>
+      <option value="3">&#xFFE0;</option>
+    </select>
 
 
 
 
 
 
-  <script src="../JsIntro/index.js"></script>
+
+
+    <script src="../JsIntro/index.js"></script>
 </body>
 
 </html>
