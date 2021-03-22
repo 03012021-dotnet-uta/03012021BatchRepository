@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Rewrite;// is is added for the redirector on line 61
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -52,6 +52,7 @@ namespace memesaver
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "memesaver v1"));
             }
 
+            // allows to use the static JS pages
             app.UseStatusCodePages();
 
             app.UseHttpsRedirection();
