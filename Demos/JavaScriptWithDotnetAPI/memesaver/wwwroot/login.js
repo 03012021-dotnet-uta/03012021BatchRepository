@@ -5,9 +5,22 @@ const responseDiv = document.getElementsByClassName('responseFromLogin');
 loginForm.addEventListener('submit', (event) => {
 
   event.preventDefault();
-  // console.log('FIRST response.json');
+
+  /**create a string[] to send to the API in the body */
+  const stringObj = {
+    fname: loginForm.fName.value,
+    lname: loginForm.lName.value
+  }
+
   //use Fetch() call the method of the controller that will return the string....
-  fetch('/api/meme')
+  fetch('/postrequest', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(stringObj)
+  })
     .then(response => {
       if (!response.ok) {
         throw new Error(`Network response was not ok (${response.status})`);

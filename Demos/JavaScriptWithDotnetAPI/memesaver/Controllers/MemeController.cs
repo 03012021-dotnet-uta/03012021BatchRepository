@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,7 +18,7 @@ namespace memesaver
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Mark", "Moore" };
         }
 
         // GET api/<MemeController>/5
@@ -29,8 +30,11 @@ namespace memesaver
 
         // POST api/<MemeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("/postrequest")]
+        public Person Post([FromBody] Person obj)
         {
+            Console.WriteLine($"YAY! we made it to the C# side with {obj.fName}, {obj.lName}. ");
+            return obj;
         }
 
         // PUT api/<MemeController>/5
