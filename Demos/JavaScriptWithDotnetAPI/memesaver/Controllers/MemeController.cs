@@ -30,10 +30,10 @@ namespace memesaver
 
         // POST api/<MemeController>
         [HttpPost]
-        [Route("/postrequest")]
+        // [Route("/postrequest")]
         public Person Post([FromBody] Person obj)
         {
-            Console.WriteLine($"YAY! we made it to the C# side with {obj.fName}, {obj.lName}. ");
+            Console.WriteLine($"YAY! we made it to the C# side with {obj.Fname}, {obj.Lname}. ");
             return obj;
         }
 
