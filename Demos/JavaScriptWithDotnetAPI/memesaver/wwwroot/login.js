@@ -3,24 +3,25 @@ const responseDiv = document.getElementsByClassName('responseFromLogin');
 
 
 loginForm.addEventListener('submit', (event) => {
-
   event.preventDefault();
-
   /**create a string[] to send to the API in the body */
-  const stringObj = {
-    fname: loginForm.fName.value,
-    lname: loginForm.lName.value
+  const loginData = {
+    Fname: loginForm.fname.value.trim(),
+    Lname: loginForm.lname.value.trim()
   }
+  console.log(loginForm.fname.value.trim());
+  console.log(loginForm.lname.value.trim());
+  console.log('plain text');
+  //debugger
 
-  //use Fetch() call the method of the controller that will return the string....
-  fetch('/postrequest', {
+  fetch('api/meme', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type':'application/json'
     },
-    body: JSON.stringify(stringObj)
-  })
+    body:JSON.stringify(loginData)
+    })
     .then(response => {
       if (!response.ok) {
         throw new Error(`Network response was not ok (${response.status})`);
@@ -29,26 +30,12 @@ loginForm.addEventListener('submit', (event) => {
         return response.json();
     })
     .then((jsonResponse) => {
-        // Initialize the DOM parser
-        //var parser = new DOMParser();
-
-        // Parse the text
-        //var doc = parser.parseFromString(html, "text/html");
-
-        // You can now even select part of that html as you would in the regular DOM 
-        // Example:
-        // var docArticle = doc.querySelector('article').innerHTML;
-        responseDiv[0].textContent = jsonResponse;
-        // console.log(doc);
-    })
+      responseDiv[0].textContent = jsonResponse.fname
+      console.log(jsonResponse);
+    }
+    )
     .catch(function(err) {  
         console.log('Failed to fetch page: ', err);  
     });
-      // console.log('response.json');
-      // return response.json();
-      // location = 'upload.html';// do this to change the browser page to a different .html
-
-      // print the return to the screen
-      // responseDiv[0].innerHTML = response.text();
-    });
+});
 
