@@ -39,11 +39,11 @@ steps:
     # performMultiLevelLookup: true
 
 
-# - task: NuGetToolInstaller@1
+- task: NuGetToolInstaller@1
 
-# - task: NuGetCommand@2
-#   inputs:
-#     restoreSolution: '$(solution)'
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
 
 #this will restore and build the directory.
 - task: DotNetCoreCLI@2
