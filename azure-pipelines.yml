@@ -73,6 +73,6 @@ steps:
     command: 'publish'
     publishWebProjects: false
     # modifyOutputPath: false
-    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
-    # projects: '$(solution)'
+    # workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+    projects: '$(solution)'
     zipAfterPublish: true
