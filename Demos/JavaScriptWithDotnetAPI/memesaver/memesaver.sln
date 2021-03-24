@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memesaver", "memesaver.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "models", "..\models\models.csproj", "{6C4CD48A-2F60-44CE-88AC-46A614B77D69}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "..\BusinessLogic\BusinessLogic.csproj", "{8CDEBB58-010B-4C5E-8EE6-33ED84A88164}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\Repository\Repository.csproj", "{E246011D-1B9E-4879-9E3E-DB844AADCD87}"
