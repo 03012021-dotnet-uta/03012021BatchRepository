@@ -9,14 +9,14 @@ trigger:
     - main
   paths:
     include:
-    - Demos/JavaScriptWithDotnetAPI/memesaver
+    - Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln
 
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
+  solution: './Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -34,6 +34,7 @@ steps:
   inputs:
     packageType: 'runtime'
     version: '2.x'
+    performMultiLevelLookup: true
 
 
 - task: NuGetToolInstaller@1
