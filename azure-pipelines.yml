@@ -71,6 +71,8 @@ steps:
   displayName: 'Publishing'
   inputs:
     command: 'publish'
-    publishWebProjects: true
-    modifyOutputPath: false
-    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
+    publishWebProjects: false
+    # modifyOutputPath: false
+    # workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
+    projects: '$(solution)'
+    zipAfterPublish: true
