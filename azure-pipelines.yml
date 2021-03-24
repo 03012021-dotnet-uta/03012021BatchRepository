@@ -30,6 +30,10 @@ steps:
     performMultiLevelLookup: true
     includePreviewVersions: true # Required for preview versions
 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'runtime'
+    version: '2.x'
 
 
 - task: NuGetToolInstaller@1
