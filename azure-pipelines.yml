@@ -16,7 +16,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: './Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
+  solution: 'Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -26,9 +26,10 @@ steps:
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
   inputs:
-    version: 5.0.x
-    performMultiLevelLookup: true
-    includePreviewVersions: true # Required for preview versions
+    packageType: 'sdk'
+    version: '5.0.x'
+    # performMultiLevelLookup: true
+    # includePreviewVersions: true # Required for preview versions
 
 - task: UseDotNet@2
   inputs:
