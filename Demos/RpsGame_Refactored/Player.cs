@@ -57,7 +57,7 @@ namespace RpsGame_NoDb
 
         //below is methods
         /// <summary>
-        /// This method inrements the Wins or the player
+        /// This method increments the Wins or the player
         /// </summary>
         public void AddWin()
         {
