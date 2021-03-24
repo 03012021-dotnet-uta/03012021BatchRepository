@@ -13,11 +13,11 @@ namespace Repository
 
         public Person Login(Person user)
         {
-            /**use the context to call the Db 
+			/**use the context to call the Db 
             and query for the first usr that matches 
             the first and last name*/
-            //Person user = context.Person.FirstOrDefault(p => p.Fname == user.Fname && p.Lname == user.Lname);
-            Person user1 = new Person()
+			//Person user = context.Person.FirstOrDefault(p => p.Fname == user.Fname && p.Lname == user.Lname);
+			Person user1 = new Person()
             {
                 Fname = "Jerry",
                 Lname = "Walker"
