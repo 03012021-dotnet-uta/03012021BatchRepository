@@ -13,8 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Repository;
-using Microsoft.EntityFrameworkCore;
 using BusinessLogic;
+using Microsoft.EntityFrameworkCore;
 
 namespace memesaver
 {
@@ -31,6 +31,10 @@ namespace memesaver
 		public void ConfigureServices(IServiceCollection services)
 		{
 			// get the connection string from the user secrets
+			// this code is setting up the communication with the database
+			// WE HAVE NOT UTILIZED ENTITY FRAMEWORK YET.
+			// SO THIS IS JUST HOLDING THE PLACE FOR THAT
+			// THIS CODE DOES NOTHING RIGHT NOW.
 			string connectionString = Configuration.GetConnectionString("memeDb");
 
 			// add the Db context
@@ -38,8 +42,8 @@ namespace memesaver
 			{
 				options.UseSqlServer(connectionString);
 			});
-			services.AddScoped<UserMethods>();
-			services.AddScoped<MemeSaverRepo>();
+			services.AddScoped<UserMethods>();// THIS REGISTERS THE CLASS WITH THE DEPENDENCY INJECTION SYSTEM.
+			services.AddScoped<MemeSaverRepo>();// THIS REGISTERS THE CLASS WITH THE DEPENDENCY INJECTION SYSTEM.
 
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
