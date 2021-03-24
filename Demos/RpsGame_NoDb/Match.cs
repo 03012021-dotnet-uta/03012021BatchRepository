@@ -1,22 +1,24 @@
 
 using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RpsGame_NoDb
 {
     public class Match
     {
-        private Guid matchId = Guid.NewGuid();
-        public Guid MatchId { get { return matchId; } }
+        // private Guid matchId = Guid.NewGuid();
+        [Key]
+        public Guid MatchId { get; set; } = Guid.NewGuid();
 
         public Player Player1 { get; set; } // always the computer
         public Player Player2 { get; set; } // always the user.
 
         public List<Round> Rounds = new List<Round>();
 
-        private int p1RoundWins { get; set; } // ho many rounds has the player won?
-        private int p2RoundWins { get; set; }
-        private int ties { get; set; }
+        public int p1RoundWins { get; set; } // ho many rounds has the player won?
+        public int p2RoundWins { get; set; }
+        public int ties { get; set; }
 
 
         /// <summary>
@@ -56,12 +58,5 @@ namespace RpsGame_NoDb
                 return null;
             }
         }
-
-
-
-
-
     }
-
-
 }

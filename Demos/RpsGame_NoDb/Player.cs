@@ -1,59 +1,62 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RpsGame_NoDb
 {
     public class Player
     {
+        public Player() { }
         public Player(string fname = "null", string lname = "null")
         {
             this.Fname = fname;
             this.Lname = lname;
         }
 
-        private Guid playerId = Guid.NewGuid();
-        public Guid PlayerId
-        {
-            get
-            {
-                return playerId;
-            }
-        }
+        [Key]
+        public Guid PlayerId { get; set; } = Guid.NewGuid();
+        // public Guid PlayerId
+        // {
+        //     get
+        //     {
+        //         return playerId;
+        //     }
+        // }
 
-        private int numWins;
-        private int numLosses;
-        private string fName;
-        public string Fname
-        {
-            get { return fName; }
-            set
-            {
-                if (value is string && value.Length < 20 && value.Length > 0)
-                {
-                    fName = value;
-                }
-                else
-                {
-                    throw new Exception("The player name you sent is not valid");
-                }
-            }
-        }
+        public int numWins;
+        public int numLosses;
+        public string Fname;
+        // public string Fname
+        // {
+        //     get { return fName; }
+        //     set
+        //     {
+        //         if (value is string && value.Length < 20 && value.Length > 0)
+        //         {
+        //             fName = value;
+        //         }
+        //         else
+        //         {
+        //             throw new Exception("The player name you sent is not valid");
+        //         }
+        //     }
+        // }
 
-        private string lName;
-        public string Lname
-        {
-            get { return lName; }
-            set
-            {
-                if (value is string && value.Length < 20 && value.Length > 0)
-                {
-                    lName = value;
-                }
-                else
-                {
-                    throw new Exception("The player name you sent is no valid");
-                }
-            }
-        }
+        public string Lname { get; set; }
+        // public string Lname
+        // {
+        //     get { return lName; }
+        //     set
+        //     {
+        //         if (value is string && value.Length < 20 && value.Length > 0)
+        //         {
+        //             lName = value;
+        //         }
+        //         else
+        //         {
+        //             throw new Exception("The player name you sent is no valid");
+        //         }
+        //     }
+        // }
 
         //below is methods
         /// <summary>
