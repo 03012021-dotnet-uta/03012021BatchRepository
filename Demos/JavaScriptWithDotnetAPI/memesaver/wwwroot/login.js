@@ -9,9 +9,9 @@ loginForm.addEventListener('submit', (event) => {
     Fname: loginForm.fname.value.trim(),
     Lname: loginForm.lname.value.trim()
   }
-  console.log(loginForm.fname.value.trim());
-  console.log(loginForm.lname.value.trim());
-  console.log('plain text');
+  // console.log(loginForm.fname.value.trim());
+  // console.log(loginForm.lname.value.trim());
+  // console.log('plain text');
   //debugger
 
   fetch('api/meme', {
@@ -30,7 +30,7 @@ loginForm.addEventListener('submit', (event) => {
         return response.json();
     })
     .then((jsonResponse) => {
-      responseDiv[0].textContent = jsonResponse.fname
+      responseDiv[0].textContent = jsonResponse.fname + ' ' + jsonResponse.lname;
       console.log(jsonResponse);
     }
     )
