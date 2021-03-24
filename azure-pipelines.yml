@@ -9,7 +9,7 @@ trigger:
     - main
   paths:
     include:
-    - Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln
+    - Demos/JavaScriptWithDotnetAPI
 
 
 pool:
@@ -36,7 +36,7 @@ steps:
   inputs:
     packageType: 'runtime'
     version: '2.x'
-    performMultiLevelLookup: true
+    # performMultiLevelLookup: true
 
 
 # - task: NuGetToolInstaller@1
