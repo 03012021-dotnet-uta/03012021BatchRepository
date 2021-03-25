@@ -7,6 +7,7 @@ trigger:
   branches:
     include:
     - main
+#the below is required only if you have multiple .sln files in your repo.
   paths:
     include:
     - Demos/JavaScriptWithDotnetAPI
@@ -29,7 +30,7 @@ steps:
     packageType: 'sdk'
     version: '5.0.x'
     # performMultiLevelLookup: true
-    # includePreviewVersions: true # Required for preview versions
+    # includePreviewVersions: false # Required 'true' to use preview versions
 
 - task: UseDotNet@2
   displayName: 'Install .NET Core Runtime'
@@ -45,6 +46,7 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+#this must go before the 'build' task.
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: '03012021BatchServiceToken1'
