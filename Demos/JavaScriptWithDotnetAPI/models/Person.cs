@@ -12,6 +12,7 @@ namespace models
 		public string Lname { get; set; }
 
 		ICollection<Meme> Memes { get; set; }// memes I've created
+
 		ICollection<Meme> Liked { get; set; }// memes I've liked
 
 	}
