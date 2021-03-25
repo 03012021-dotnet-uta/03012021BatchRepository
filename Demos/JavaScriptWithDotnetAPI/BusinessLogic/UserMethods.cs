@@ -21,13 +21,13 @@ namespace BusinessLogic
 		/// <returns type="int"></returns>
 		public int QuadrupleTheInt(int x)
 		{
-			//int y = 0;
-			//y += x;
-			//x += y;
-			//x *= 2;
-			//return x;
+			int y = 0;
+			y += x;
+			x += y;
+			x *= 2;
+			return x;
 
-			return x * 4;
+			//return x * 4;
 		}
 		/// <summary>
 		/// This method takes a user and returns a verified user, if it exists.
