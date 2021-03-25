@@ -62,6 +62,19 @@ steps:
     workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
     arguments: '--configuration $(buildConfiguration)'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+    testRunTitle: 'Dotnet tests running'
+    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/coburtura/coverage.xml'
+
 - task: SonarCloudAnalyze@1
 
 - task: SonarCloudPublish@1
