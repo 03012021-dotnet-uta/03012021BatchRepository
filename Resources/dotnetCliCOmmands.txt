@@ -1,0 +1,30 @@
+SOURCE - https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-dotnet-cli
+
+
+- Install a NuGet Package -
+1) cd to the specific projects root directory. If installing to the .sln just be in the .sln root dir.
+dotnet add package Unity.Mvc
+dotnet add package <nameOfPackage>
+
+- uninstall a NuGet package -
+dotnet remove package Unity.Mvc
+dotnet remove package <PACKAGE_NAME>
+
+- Update a NuGet package - 
+
+
+
+- Add an Assemply Reference - 
+
+
+
+- EF migrations commands in dotnet CLI- 
+
+https://docs.microsoft.com/en-us/ef/core/cli/dotnet
+https://www.entityframeworktutorial.net/efcore/cli-commands-for-ef-core-migration.aspx#migrations-add
+
+1. Add a migration becuause you made changes to existing tables or entities. Do this ('-s' == startup project, '-p' == project containing context class)
+dotnet ef migrations add <nameOfMigration> -s <pathToStartupProject> -p <pathToContextProject>
+
+2. update the database bc you just created a new migration.
+dotnet ef database update

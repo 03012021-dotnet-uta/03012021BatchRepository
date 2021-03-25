@@ -1,0 +1,157 @@
+Difference between abstract class and interface? 
+
+What is dependency injection? 
+
+What is an index? 
+
+What is the difference between method overloading and method overriding?  
+
+What version of C# are you using? 
+
+What is the difference between managed and non-managed code? 
+
+What are the OOP concepts? 
+
+What is inheritance? 
+
+What is the difference between a primary key and a unique key? 
+
+What is MVC? 
+
+What are the benefits of MVC? 
+
+What features of MVC have you used? 
+
+Describe routing in MVC. 
+
+How did you implement Web APIs in your project? 
+
+How did you use Mongol DB? (you shouldn't necessarily know this.)
+
+What is polymorphism? How is it used in C#? 
+
+What is the difference between DROP and TRUNCATE? 
+
+What is the syntax for DROP? 
+
+Have you used Angular and why is it better than just using HTML? 
+
+How to implement “using" in a function in C# 
+
+How to connect your database in C#  
+
+What is the back end? 
+
+How did you employ Okta in your application? 
+
+What’s the difference between nonfunctional and functional requirements? 
+
+What was your role in the project? 
+
+Explain TDD. 
+
+How did your code connect to the database? 
+
+Were there any code reviews in your training? 
+
+How much DevOps do you know? 
+
+How much Angular do you know? 
+
+What are the other architectural patterns beside MVC? 
+
+Can you use SOAP in instead of REST for your microservice architecture (why or why not)?    
+
+Tell me about RESTful APIs. 
+
+Tell me about inheritance. 
+
+Tell me about the difference between managed and unmanaged code. 
+
+Tell me about the CLR.  
+
+Given class A and class B, how would you invoke class A's method? 
+
+How do you handle errors in C#? 
+What is the finally block? 
+
+What is MVC? 
+
+What is an interface? 
+
+What is a Cursor and how do you use it? 
+
+What is union and union all in sql?  
+
+What types of databases have you used? 
+
+How competent are you with C#? 
+
+What’s the difference between a SQL Function and a Stored Procedure? 
+
+Describe the ASP.NET MVC design pattern and the associated flow. 
+
+What does it mean for something to be static? 
+
+Can you inherit a static class? 
+
+What’s the advantage of anonymous data types, i.e. use of var when declaring variables?  
+
+What are SQL Transactions? 
+
+What is MVC? 
+
+What component of MVC handles the interaction with the user? 
+
+What’s the purpose of ViewData when it comes to MVC? 
+
+What are SQL Functions? 
+
+What are scalar functions used for? 
+
+
+c#:
+
+what is an object?
+
+Can you explain what mvc is or mvc lifecycle (don't remember exactly which one it was)?
+
+Difference between viewbag, viewdata, and tempdata?
+
+What are threads and how do they differ from tasks/how are they used in c#?
+
+Difference between a get and a post (not sure on this one but I think they asked it)?
+
+Can you catch/send multiple exceptions with a try/catch statement (not sure on this one but I think they asked it)?
+
+
+sql:
+
+what is a stored procedure?
+
+difference between a stored procedure and a function?
+
+can a stored procedure call a function and can a function call a stored procedure?
+
+What are drop and truncate and how do they differ (not sure on this one but I think they asked it)?
+
+What is a trigger (not sure on this one but I think they asked it)?
+
+ 
+devops:
+
+what is agile programming?
+
+do you have any experience with agile programming (not sure on this one but I think they asked it)?
+
+
+angular:
+
+how do you use routing in angular?
+
+
+Other:
+
+what projects have you worked on recently and what did you do in them?
+
+have you had any experience with the healthcare system?
