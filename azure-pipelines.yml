@@ -45,6 +45,14 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: '03012021BatchServiceToken1'
+    organization: '03012021batch'
+    scannerMode: 'MSBuild'
+    projectKey: '03012021Batch_03012021BatchPipelineDemo'
+    projectName: '03012021BatchPipelineDemo'
+
 #this will restore and build the directory.
 - task: DotNetCoreCLI@2
   displayName: 'building'
@@ -54,6 +62,11 @@ steps:
     workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
     arguments: '--configuration $(buildConfiguration)'
 
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publishing'
