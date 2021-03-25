@@ -1,0 +1,78 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - Demos/JavaScriptWithDotnetAPI
+
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+
+#this installs the newest SDK for this build
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '5.0.x'
+    # performMultiLevelLookup: true
+    # includePreviewVersions: true # Required for preview versions
+
+- task: UseDotNet@2
+  displayName: 'Install .NET Core Runtime'
+  inputs:
+    packageType: 'runtime'
+    version: '2.x'
+    # performMultiLevelLookup: true
+
+
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+#this will restore and build the directory.
+- task: DotNetCoreCLI@2
+  displayName: 'building'
+  inputs:
+    command: 'build'
+    projects: 'Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
+    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+    arguments: '--configuration $(buildConfiguration)'
+
+# - task: VSBuild@1
+#   inputs:
+#     solution: '$(solution)'
+#     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+#     platform: '$(buildPlatform)'
+#     configuration: '$(buildConfiguration)'
+
+
+# - task: VSTest@2
+#   inputs:
+#     platform: '$(buildPlatform)'
+#     configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publishing'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    # modifyOutputPath: false
+    # workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+    projects: '$(solution)'
+    zipAfterPublish: true
