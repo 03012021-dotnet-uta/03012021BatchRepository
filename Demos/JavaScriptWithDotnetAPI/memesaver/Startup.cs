@@ -30,7 +30,7 @@ namespace memesaver
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // get the connection string from the user secrets
+            // get the connection string from the user secrets.
             // this code is setting up the communication with the database
             // WE HAVE NOT UTILIZED ENTITY FRAMEWORK YET.
             // SO THIS IS JUST HOLDING THE PLACE FOR THAT
