@@ -4,32 +4,91 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- main
+  branches:
+    include:
+    - main
+#the below is required only if you have multiple .sln files in your repo.
+  paths:
+    include:
+    - Demos/JavaScriptWithDotnetAPI
+
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+
+#this installs the newest SDK for this build
 steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '5.0.x'
+    # performMultiLevelLookup: true
+    # includePreviewVersions: false # Required 'true' to use preview versions
+
+- task: UseDotNet@2
+  displayName: 'Install .NET Core Runtime'
+  inputs:
+    packageType: 'runtime'
+    version: '2.x'
+    # performMultiLevelLookup: true
+
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
-- task: VSBuild@1
+#this must go before the 'build' task.
+- task: SonarCloudPrepare@1
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    SonarCloud: '03012021BatchServiceToken1'
+    organization: '03012021batch'
+    scannerMode: 'MSBuild'
+    projectKey: '03012021Batch_03012021BatchPipelineDemo'
+    projectName: '03012021BatchPipelineDemo'
 
-
-- task: VSTest@2
+#this will restore and build the directory.
+- task: DotNetCoreCLI@2
+  displayName: 'building'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'build'
+    projects: 'Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
+    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+    testRunTitle: 'Dotnet tests running'
+    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/coburtura/coverage.xml'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publishing'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    # modifyOutputPath: false
+    # workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+    projects: '$(solution)'
+    zipAfterPublish: true
