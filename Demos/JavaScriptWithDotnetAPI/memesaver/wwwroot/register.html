@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  register works
+  <!-- make a registeration form -->
+  <div class="divAroundForm">
+    <form class="regform">
+      <div class="formdiv">
+        <label for="fname">Enter your First Name:</label>
+        <input class="forminput" type="text" id="fname" name="fname" placeholder="first name" required>
+      </div>
+      <div class="formdiv">
+        <label for="lname">Enter your Last Name:</label>
+        <input class="forminput" type="text" id="lname" name="lname" placeholder="last name" required>
+      </div>
+      <div class="formdiv">
+        <label for="username">Enter your Username:</label>
+        <input class="forminput" type="text" id="username" name="username" placeholder="username" required>
+      </div>
+      <div class="formdiv">
+        <label for="password">Enter your Password:</label>
+        <!-- add a regex that  verifies the password requirements-->
+        <input class="forminput" type="password" id="password" name="password" placeholder="password" required>
+        <div class="textred">**Password must have at least 1 uppercase letter, 1 lowercase letter, and one special
+          character** </div>
+      </div>
+      <input class="formButton" type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div class="registerResponse"></div>
+
+  <div class="responseDiv"></div>
+  <script src="register.js"></script>
+</body>
+
+</html>
