@@ -7,7 +7,7 @@ namespace models
     public class Person
     {
         [Key]
-        public Guid PersonId { get; set; } = new Guid();
+        public Guid PersonId { get; set; } = Guid.NewGuid();
         public string Fname { get; set; }
         public string Lname { get; set; }
         public string UserName { get; set; }//needed from user
