@@ -9,10 +9,10 @@ registerForm.addEventListener('submit', (e) => {
   // grab the data and create an object to send as part of the body of my fetch()
   // console.log(registerForm.fname.value);
   const userData = {
-    fname: registerForm.fname.value,
-    lname: registerForm.lname.value,
-    username: registerForm.username.value,
-    password: registerForm.password.value,
+    fname: registerForm.fname.value.trim(),
+    lname: registerForm.lname.value.trim(),
+    username: registerForm.username.value.trim(),
+    password: registerForm.password.value.trim(),
   }
 
   fetch('api/meme/register', {

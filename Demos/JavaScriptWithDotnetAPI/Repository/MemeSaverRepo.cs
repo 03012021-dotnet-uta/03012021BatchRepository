@@ -32,6 +32,12 @@ namespace Repository
 
         }
 
+        /// <summary>
+        /// Takes a username and returns true if the username is found in the Db.
+        /// Otherwise returns false.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public bool UserExists(string userName)
         {
             //default is NULL
@@ -55,6 +61,18 @@ namespace Repository
             var newPerson1 = _context.Persons.Add(newPerson);// addd the new person to the Db
             _context.SaveChanges();// save the change.
             return _context.Persons.FirstOrDefault(p => p.PersonId == newPerson.PersonId);// default is null
+        }
+
+        /// <summary>
+        /// This method takes a string of the username and returns the Person object from the Db
+        /// If no person is found, returns null.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public Person GetPersonByUsername(string username)
+        {
+            Person foundPerson = _context.Persons.FirstOrDefault(p => p.UserName == username);
+            return foundPerson;
         }
 
 

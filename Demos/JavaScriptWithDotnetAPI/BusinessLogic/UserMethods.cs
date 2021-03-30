@@ -69,6 +69,47 @@ namespace BusinessLogic
             }
         }
 
+        public Person Login(string username, string password)
+        {
+            if (_repolayer.UserExists(username) == false)
+            {
+                return null;
+            }
+            else
+            {
+                //get the matching user with this Username
+                Person foundPerson = _repolayer.GetPersonByUsername(username);
+
+                // hash the provided password with the key from the found user
+                byte[] hash = mapper.HashTheUsername(password, foundPerson.PasswordSalt);
+
+                // compare the 2 hashes with a external method
+                // if the 2 hashes match return the found user.
+                if (CompareTwoHashes(foundPerson.PasswordHash, hash))
+                {
+                    return foundPerson;
+                }
+                else return null;
+            }
+        }
+
+        private bool CompareTwoHashes(byte[] arr1, byte[] arr2)
+        {
+            if (arr1.Length != arr2.Length)
+            {
+                return false;
+            }
+            //compare the hash of the inputted password and the found user
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                if (arr1[i] != arr2[i])
+                {
+                    return false;
+                } // Unauthorized("Invalid Password");
+            }
+            return true;
+        }
+
 
 
     }// end of class
