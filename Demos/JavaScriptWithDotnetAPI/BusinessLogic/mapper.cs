@@ -22,5 +22,17 @@ namespace BusinessLogic
                 return user;
             }
         }
-    }
-}
+
+        public byte[] HashTheUsername(string password, byte[] key)
+        {
+            using HMACSHA512 hmac = new HMACSHA512(key: key);
+
+            var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return hashedPassword;
+        }
+
+
+
+
+    }// end of class
+}// end of namespace

@@ -9,18 +9,19 @@
 </head>
 
 <body>
-	login page works!
-
+	<h3>Please Log in.</h3>
 	<form id="loginform" method="POST">
-		<label for="loginfname">First Name:</label>
-		<input type="text" name="fname" id="loginfname" autocomplete="off" placeholder="First Name">
-		<label for="loginlname">First Name:</label>
-		<input type="text" name="lname" id="loginlname" autocomplete="off" placeholder="Last Name">
-		<input type="submit" value="Send">
+		<label for="loginusername">UserName:</label>
+		<input type="text" name="username" id="loginusername" autocomplete="off" placeholder="UserName">
+		<label for="loginpassword">Password:</label>
+		<input type="text" name="password" id="loginpassword" autocomplete="off" placeholder="Password">
+		<input type="submit" value="Login">
 	</form>
 
 	<div class="responseFromLogin"></div>
-
+	<!-- <div class="navButtons">
+		<button class="navbutton"></button>
+	</div> -->
 
 	<script src="login.js"></script>
 </body>

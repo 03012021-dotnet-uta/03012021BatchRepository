@@ -41,17 +41,35 @@ namespace memesaver
             {
                 return StatusCode(409, "We're sorry, your new user was not successfully saved or a user of that username already exists.");
             }
-
-
             return person;
         }
 
         // THIS IS AN ACTION METHOD
         // GET: api/<MemeController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("login/{username}/{password}")]
+        public ActionResult<Person> Login(string username, string password)
         {
-            return new string[] { "Mark", "Moore" };
+            // return new string[] { "Mark", "Moore" };
+            //here we will do mich the same as in the register.....
+            Person person = new Person();
+            if (!ModelState.IsValid)// did the conversion from JS to C# work?
+            {
+                // return StatusCode(409, $"User '{rawPerson.UserName}' already exists.");
+                return StatusCode(400, "That was a failue of modelbinding");
+            }
+            else
+            {
+                // here you will use the bussiness logic layer instance to pass the data to that layer and eventually save it to the Db.
+                //Console.WriteLine($"{rawperson.Fname}, {rawperson.Lname}");
+                person = _business.Login(username, password);
+            }
+
+            //check if person is null!!!
+            if (person == null)
+            {
+                return StatusCode(409, "We're sorry, your username was not found.");
+            }
+            return person;
         }
 
         // GET api/<MemeController>/5
