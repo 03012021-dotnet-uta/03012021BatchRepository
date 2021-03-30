@@ -10,7 +10,7 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(memeSaverContext))]
-    [Migration("20210325195538_migration1")]
+    [Migration("20210330151039_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,19 @@ namespace Repository.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("models.LikesJunction", b =>
+                {
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MemeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PersonId", "MemeId");
+
+                    b.ToTable("LikesJunction");
+                });
+
             modelBuilder.Entity("models.Meme", b =>
                 {
                     b.Property<Guid>("MemeId")
@@ -30,18 +43,13 @@ namespace Repository.Migrations
                     b.Property<string>("MemeString")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("PersonId1")
+                    b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UploadDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("MemeId");
-
-                    b.HasIndex("PersonId1");
 
                     b.ToTable("Memes");
                 });
@@ -58,18 +66,21 @@ namespace Repository.Migrations
                     b.Property<string>("Lname")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("MemberSince")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("PersonId");
 
                     b.ToTable("Persons");
-                });
-
-            modelBuilder.Entity("models.Meme", b =>
-                {
-                    b.HasOne("models.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId1");
-
-                    b.Navigation("Person");
                 });
 #pragma warning restore 612, 618
         }

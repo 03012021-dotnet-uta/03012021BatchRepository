@@ -41,8 +41,8 @@ namespace Repository.Migrations
                     b.Property<string>("MemeString")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UploadDate")
                         .HasColumnType("datetime2");

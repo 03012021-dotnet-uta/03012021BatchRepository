@@ -15,7 +15,7 @@ namespace models
         public byte[] PasswordSalt { get; set; }// comes from the {} in the system
         public DateTime MemberSince { get; set; } = DateTime.Now;
 
-        ICollection<Meme> Memes { get; set; }// memes that I have uploaded
-        ICollection<Meme> MemesILiked { get; set; }// this is the memes I have liked.
+        ICollection<Meme> Memes { get; set; } = new List<Meme>();// memes that I have uploaded
+        ICollection<Meme> MemesILiked { get; set; } = new List<Meme>();// this is the memes I have liked.
     }
 }
