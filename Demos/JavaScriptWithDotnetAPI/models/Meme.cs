@@ -15,7 +15,7 @@ namespace models
 
         ICollection<Person> WhoLiked { get; set; }//defines who has liked this meme many-to-many relationship
 
-        public int PersonId { get; set; }// these together define the 1-many relationship
-                                         //public Person Person { get; set; }// 
+        public Guid PersonId { get; set; }// these together define the 1-many relationship
+                                          //public Person Person { get; set; }// 
     }
 }

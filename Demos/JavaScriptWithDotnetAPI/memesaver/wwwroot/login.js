@@ -1,5 +1,5 @@
 const loginForm = document.getElementById('loginform');
-const responseDiv = document.getElementsByClassName('responseFromLogin');
+const responseDiv = document.querySelector('.registerResponse');
 
 
 loginForm.addEventListener('submit', (event) => {
@@ -7,7 +7,10 @@ loginForm.addEventListener('submit', (event) => {
   /**create a string[] to send to the API in the body */
   const loginData = {
     Fname: loginForm.fname.value.trim(),
-    Lname: loginForm.lname.value.trim()
+    Lname: loginForm.lname.value.trim(),
+    Username: loginForm.username.value.trim(),
+    Password: loginForm.password.value.trim(),
+
   }
   // console.log(loginForm.fname.value.trim());
   // console.log(loginForm.lname.value.trim());
@@ -30,10 +33,18 @@ loginForm.addEventListener('submit', (event) => {
         return response.json();
     })
     .then((jsonResponse) => {
-      responseDiv[0].textContent = jsonResponse.fname + ' ' + jsonResponse.lname;
+      responseDiv.textContent = `Welcome, ${jsonResponse.fname} ${jsonResponse.lname}. It's good to see you.`;
       console.log(jsonResponse);
-    }
-    )
+      return jsonResponse
+    })
+    .then(res => {
+      //save the personId to localStorage
+      localStorage.setItem('personId', res.personId);
+      sessionStorage.setItem('personId', res.personId);
+      //switch the screen
+      location = 'personmenu.html';
+
+    })
     .catch(function(err) {  
         console.log('Failed to fetch page: ', err);  
     });

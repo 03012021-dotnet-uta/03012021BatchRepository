@@ -1,4 +1,4 @@
-namespace memesaver
+namespace models
 {
     public class RawPerson
     {

@@ -21,9 +21,10 @@ namespace memesaver
         }
 
         [HttpPost("register")]
-        public ActionResult<RawPerson> Register(RawPerson rawperson)
+        public ActionResult<Person> Register(RawPerson rawperson)
         {
-            if (!ModelState.IsValid)
+            Person person = new Person();
+            if (!ModelState.IsValid)// did the conversion from JS to C# work?
             {
                 // return StatusCode(409, $"User '{rawPerson.UserName}' already exists.");
                 return StatusCode(400, "That was a failue of modelbinding");
@@ -31,10 +32,18 @@ namespace memesaver
             else
             {
                 // here you will use the bussiness logic layer instance to pass the data to that layer and eventually save it to the Db.
-                Console.WriteLine($"{rawperson.Fname}, {rawperson.Lname}");
+                //Console.WriteLine($"{rawperson.Fname}, {rawperson.Lname}");
+                person = _business.Register(rawperson);
             }
 
-            return rawperson;
+            //check if person is null!!!
+            if (person == null)
+            {
+                return StatusCode(409, "We're sorry, your new user was not successfully saved or a user of that username already exists.");
+            }
+
+
+            return person;
         }
 
         // THIS IS AN ACTION METHOD

@@ -8,16 +8,15 @@ namespace Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Persons",
+                name: "LikesJunction",
                 columns: table => new
                 {
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Fname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Lname = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MemeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persons", x => x.PersonId);
+                    table.PrimaryKey("PK_LikesJunction", x => new { x.PersonId, x.MemeId });
                 });
 
             migrationBuilder.CreateTable(
@@ -27,28 +26,36 @@ namespace Repository.Migrations
                     MemeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MemeString = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UploadDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PersonId = table.Column<int>(type: "int", nullable: false),
-                    PersonId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Memes", x => x.MemeId);
-                    table.ForeignKey(
-                        name: "FK_Memes_Persons_PersonId1",
-                        column: x => x.PersonId1,
-                        principalTable: "Persons",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Memes_PersonId1",
-                table: "Memes",
-                column: "PersonId1");
+            migrationBuilder.CreateTable(
+                name: "Persons",
+                columns: table => new
+                {
+                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Fname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    MemberSince = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Persons", x => x.PersonId);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "LikesJunction");
+
             migrationBuilder.DropTable(
                 name: "Memes");
 
