@@ -110,6 +110,37 @@ namespace BusinessLogic
             return true;
         }
 
+        public bool Editperson(EditPerson editPerson)
+        {
+            //get the person by personId 
+            Person dbPerson = _repolayer.GetPersonByUsername(editPerson.Username);
+
+            if (dbPerson == null)
+            {
+                return false;
+            }
+
+            // compare Db personhash with received hash to verify it's the same GetPersonByUsername
+            if (!CompareTwoHashes(dbPerson.PasswordHash, editPerson.PasswordHash)) return false;// when your body is just one line, you can disregard using the {}
+
+            // hash the new password (if not null) and save it to the DbPerson
+            if (editPerson.NewPassword != "")
+            {
+                byte[] hash = mapper.HashTheUsername(editPerson.NewPassword, dbPerson.PasswordSalt);
+                dbPerson.PasswordHash = hash;
+            }
+
+            // save all new data to the Person.
+            // this variable is a reference to the entity in the context in the repo layer
+            dbPerson.Fname = editPerson.Fname;
+            dbPerson.Lname = editPerson.Lname;
+            dbPerson.UserName = editPerson.NewUsername;
+
+            //save changed person to the Db.
+            _repolayer.SaveChanges();
+            return true;
+
+        }
 
 
     }// end of class
