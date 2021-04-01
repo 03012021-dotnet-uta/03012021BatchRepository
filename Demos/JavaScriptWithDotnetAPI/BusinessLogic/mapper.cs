@@ -15,7 +15,7 @@ namespace BusinessLogic
         /// <returns></returns>
         public Person GetANewPersonWithHashedPassword(string passwordString)
         {
-            using (var hmac = new HMACSHA512())
+            using (HMACSHA512 hmac = new HMACSHA512())
             {
                 Person user = new Person()
                 {

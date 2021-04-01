@@ -32,7 +32,13 @@ namespace memesaver
 
             // add the Db context
             // services.AddDbContext<memeSaverContext>();
-            services.AddDbContext<memeSaverContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<memeSaverContext>(options =>
+            {
+                if (!options.IsConfigured)
+                {
+                    options.UseSqlServer(connectionString);
+                }
+            });
             services.AddScoped<UserMethods>();// THIS REGISTERS THE CLASS WITH THE DEPENDENCY INJECTION SYSTEM.
             services.AddScoped<MemeSaverRepo>();// THIS REGISTERS THE CLASS WITH THE DEPENDENCY INJECTION SYSTEM.
 
