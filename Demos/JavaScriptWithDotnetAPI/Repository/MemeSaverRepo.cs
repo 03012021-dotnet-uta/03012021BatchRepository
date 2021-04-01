@@ -4,6 +4,7 @@ using models;
 
 namespace Repository
 {
+    //THe job of this 
     public class MemeSaverRepo
     {
         private readonly memeSaverContext _context;
@@ -73,6 +74,12 @@ namespace Repository
         {
             Person foundPerson = _context.Persons.FirstOrDefault(p => p.UserName == username);
             return foundPerson;
+        }
+
+        public void SaveChanges()
+        {
+            // add addittional syeps before saving changes... based on changed needs.
+            _context.SaveChanges();
         }
 
 

@@ -25,7 +25,7 @@ namespace BusinessLogic
 
         public byte[] HashTheUsername(string password, byte[] key)
         {
-            using HMACSHA512 hmac = new HMACSHA512(key: key);
+            using HMACSHA512 hmac = new HMACSHA512(key: key);// you can assign the key manually instead of using the auto-generated one that comes with the HMAC instance.
 
             var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             return hashedPassword;

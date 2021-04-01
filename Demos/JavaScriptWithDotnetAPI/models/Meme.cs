@@ -8,8 +8,9 @@ namespace models
     {
         [Key]
         public Guid MemeId { get; set; } = Guid.NewGuid();
-        public string MemeString { get; set; }
-        public DateTime UploadDate { get; set; }
+        //public string MemeString { get; set; }
+        public byte[] MemeByteArray { get; set; }
+        public DateTime UploadDate { get; set; } = new DateTime();
         //public Guid Uploader { get; set; }// not needed bc teh PersonId and Person below will be that FK
         //public int Likes { get; set; }// not needed bc I can get the numebr from the length of the WhoLiked Collection below.
 

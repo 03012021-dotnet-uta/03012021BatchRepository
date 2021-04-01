@@ -1,4 +1,4 @@
-const diveditform = document.querySelector('.diveditform');
+const diveditform = document.querySelector('.diveditform');// div around the form element
 
 
 const user = JSON.parse(localStorage.getItem('person'));
@@ -12,20 +12,20 @@ console.log(user);
     <form class="editform">
     <div class="formdiv">
       <label for="fname">Enter your First Name:</label>
-      <input class="forminput" type="text" id="fname" name="fname" placeholder="${user.fname}" required>
+      <input class="forminput" type="text" id="fname" name="fname" value="${user.fname}" required>
     </div>
     <div class="formdiv">
       <label for="lname">Enter your Last Name:</label>
-      <input class="forminput" type="text" id="lname" name="lname" placeholder="${user.lname}" required>
+      <input class="forminput" type="text" id="lname" name="lname" value="${user.lname}" required>
     </div>
     <div class="formdiv">
       <label for="username">Change your Username:</label>
-      <input class="forminput" type="text" id="username" name="username" placeholder="${user.userName}" required>
+      <input class="forminput" type="text" id="username" name="username" value="${user.userName}" required>
     </div>
     <div class="formdiv">
       <label for="password">Change your Password:</label>
       <!-- add a regex that  verifies the password requirements-->
-      <input class="forminput" type="password" id="password" name="password" placeholder="new password" required>
+      <input class="forminput" type="password" id="password" name="password" placeholder="new password">
       <div class="textred">**Password must have at least 1 uppercase letter, 1 lowercase letter, and one special
         character** </div>
     </div>
@@ -39,7 +39,7 @@ console.log(user);
 diveditform.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const editform = diveditform.querySelector('.editform');
+  const editform = diveditform.querySelector('.editform');//. you can NOW grab a reference to the form bc it exists
 
   const userData = {
     personId:user.personId,
@@ -51,7 +51,7 @@ diveditform.addEventListener('submit', (e) => {
     newUserName: editform.username.value.trim()
   }
 
-  console.log(userData);
+  // console.log(userData);
 
   fetch('api/meme/editprofile', {
     method: 'POST',
@@ -66,20 +66,20 @@ diveditform.addEventListener('submit', (e) => {
         throw new Error(`Network response was not ok (${response.status})`);
       }
       else       // When the page is loaded convert it to text
-        return response.json();
+        return response.json()
     })
     .then((jsonResponse) => {
-      registerResponse.textContent = ` Welcome, ${jsonResponse.fname} ${jsonResponse.lname}`;
+      //registerResponse.textContent = ` Welcome, ${jsonResponse.fname} ${jsonResponse.lname}`;
       console.log(jsonResponse);
-      return jsonResponse;
+      //return jsonResponse;
     })
-    .then(res => {
-      //save the personId to localStorage
-      localStorage.setItem('personId', JSON.stringify(res));// this is available to the whole browser
-      //sessionStorage.setItem('personId', res.personId);// this is ony vailable to the certain window tab.
-      //switch the screen
-      location = 'personmenu.html';// 
-    })
+    // .then(res => {
+    //   //save the personId to localStorage
+    //   //localStorage.setItem('personId', JSON.stringify(res));// this is available to the whole browser
+    //   //sessionStorage.setItem('personId', res.personId);// this is ony vailable to the certain window tab.
+    //   //switch the screen
+    //   //location = 'personmenu.html';// 
+    // })
     .catch(function(err) {  
         console.log('Failed to fetch page: ', err);  
     });

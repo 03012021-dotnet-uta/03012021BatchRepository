@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using models;
 
@@ -72,26 +74,41 @@ namespace memesaver
             return person;
         }
 
-        // GET api/<MemeController>/5
-        // [HttpGet("{id}")]
-        // public string Get(int id)
-        // {
-        //     return "value";
-        // }
-
-        // POST api/<MemeController>
-        [HttpPost]
-        // [Route("/postrequest")]
-        public Person Post([FromBody] Person obj)
+        [HttpPost("editprofile")]
+        public ActionResult<bool> EditProfile([FromBody] EditPerson editPerson)
         {
-            Console.WriteLine($"YAY! we made it to the C# side with {obj.Fname}, {obj.Lname}. ");
-            //call a method in the business logic layer.
-            //the business logic layer implements business requirements. Thisi s where the majority of 
-            // the data manipulation will be.
-            Person obj1 = _business.Login(obj);
+            //Console.WriteLine($"\n\nEditPerson is {editPerson.Fname}, {editPerson.Lname}, {editPerson.NewPassword}, {editPerson.NewUsername}, {editPerson.Username}, {editPerson.PasswordHash}\n\n");
+            //return new EmptyResult();
 
-            return obj1;
+            _business.Editperson(editPerson);
+
+            return true;
         }
 
-    }
-}
+        [HttpPost("memeupload")]
+        public ActionResult<string> Memeupload([FromForm] Guid personId, [FromForm] IFormFile meme)
+        {
+            // do everything here and return the string for demo purposes
+            //is the meme empty?
+            if (meme.Length > 0)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    //this section to for converting to a byte Array
+                    meme.CopyTo(ms); // copy thre contents of the file to the ememoryStream obj
+                    byte[] memeBytes = ms.ToArray();// convert the memory dstrezm to a byte array
+
+
+                    // this section is for convertying from a byte array to a string
+                    string memeString = Convert.ToBase64String(memeBytes, 0, memeBytes.Length); //                
+                    string imageDataString = string.Format($"data:image/jpg;base64,{memeString}");
+                    return imageDataString;
+                }
+            }
+            return StatusCode(401, "That was a failure of image handling");
+
+        }
+
+
+    }//end of class
+}//end of namespace
