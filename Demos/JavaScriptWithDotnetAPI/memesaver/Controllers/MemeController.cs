@@ -86,29 +86,41 @@ namespace memesaver
         }
 
         [HttpPost("memeupload")]
-        public ActionResult<string> Memeupload([FromForm] Guid personId, [FromForm] IFormFile meme)
+        public ActionResult<bool> Memeupload([FromForm] Guid personId, [FromForm] IFormFile meme)
         {
-            // do everything here and return the string for demo purposes
-            //is the meme empty?
-            if (meme.Length > 0)
+            bool success = _business.AddMeme(personId, meme);
+            if (!success)
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    //this section to for converting to a byte Array
-                    meme.CopyTo(ms); // copy thre contents of the file to the ememoryStream obj
-                    byte[] memeBytes = ms.ToArray();// convert the memory dstrezm to a byte array
-
-
-                    // this section is for convertying from a byte array to a string
-                    string memeString = Convert.ToBase64String(memeBytes, 0, memeBytes.Length); //                
-                    string imageDataString = string.Format($"data:image/jpg;base64,{memeString}");
-                    return imageDataString;
-                }
+                return BadRequest();
             }
-            return StatusCode(401, "That was a failure of image handling");
+            return success;
+        }
+
+        [HttpGet("memes")]
+        public ActionResult<ICollection<MemeDTO>> Memes()
+        {
+            ICollection<MemeDTO> memes = _business.Memes();
+            return Ok(memes);
 
         }
 
 
     }//end of class
 }//end of namespace
+
+
+// if (meme.Length > 0)
+// {
+//     using (MemoryStream ms = new MemoryStream())
+//     {
+//         //this section to for converting to a byte Array
+//         meme.CopyTo(ms); // copy thre contents of the file to the ememoryStream obj
+//         byte[] memeBytes = ms.ToArray();// convert the memory dstrezm to a byte array
+
+
+//         // this section is for convertying from a byte array to a string
+//         string memeString = Convert.ToBase64String(memeBytes, 0, memeBytes.Length); //                
+//         string imageDataString = string.Format($"data:image/jpg;base64,{memeString}");
+//         return imageDataString;
+//     }
+// }

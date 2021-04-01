@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 using models;
 using Repository;
 
@@ -30,6 +33,7 @@ namespace BusinessLogic
 
             //return x * 4;
         }
+
         /// <summary>
         /// This method takes a user and returns a verified user, if it exists.
         /// </summary>
@@ -48,6 +52,13 @@ namespace BusinessLogic
             return user1;
         }
 
+        /// <summary>
+        /// This method takes a RawPerson representing a new users data.
+        /// It returns the Person instance created in the database if the creation was successfull.
+        /// Otherwise returns false.
+        /// </summary>
+        /// <param name="rawPerson"></param>
+        /// <returns></returns>
         public Person Register(RawPerson rawPerson)
         {
             if (_repolayer.UserExists(rawPerson.Username) == true)
@@ -69,6 +80,14 @@ namespace BusinessLogic
             }
         }
 
+        /// <summary>
+        /// this method accepts two strings representing a username and password a user inputted.
+        /// It returns the Person instance from the database if that Person is found.
+        /// Otherwise, rturns false.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public Person Login(string username, string password)
         {
             if (_repolayer.UserExists(username) == false)
@@ -93,6 +112,13 @@ namespace BusinessLogic
             }
         }
 
+        /// <summary>
+        /// This method accepts two byte[] annd compares their respective elements.
+        /// It returns true if the byte[] are identical. False if not.
+        /// </summary>
+        /// <param name="arr1"></param>
+        /// <param name="arr2"></param>
+        /// <returns></returns>
         private bool CompareTwoHashes(byte[] arr1, byte[] arr2)
         {
             if (arr1.Length != arr2.Length)
@@ -110,6 +136,13 @@ namespace BusinessLogic
             return true;
         }
 
+        /// <summary>
+        /// This method accepts an EditPerson instance which represents the changes to be made
+        /// to a Person in stance int he Db. It returns true if the changes are successfully made.
+        /// Otherwise returns false.
+        /// </summary>
+        /// <param name="editPerson"></param>
+        /// <returns></returns>
         public bool Editperson(EditPerson editPerson)
         {
             //get the person by personId 
@@ -142,6 +175,53 @@ namespace BusinessLogic
 
         }
 
+        /// <summary>
+        /// This method accepts a personID and a iformfile image.
+        /// It adds the new meme to the database and returns true if the addition was successful.
+        /// Otherwise returns false.
+        /// /// </summary>
+        /// <returns></returns>
+        public bool AddMeme(Guid personId, IFormFile meme)
+        {
+            // create a new Meme instance
+            Meme meme1 = new Meme();
+            byte[] memeBytes = mapper.ConvertMemeIformfileToByteArray(meme);
 
+            //now pupulate the Meme instance 
+            meme1.MemeByteArray = memeBytes;
+            meme1.PersonId = personId;
+
+            // call the context method to insert the new meme
+            _repolayer.InsertMeme(meme1);
+            _repolayer.SaveChanges();
+            // this section is for convertying from a byte array to a string
+
+
+            return true;
+        }
+
+        public ICollection<MemeDTO> Memes()
+        {
+            // get all the memes from the DB.
+            ICollection<Meme> memes = _repolayer.Memes();
+            ICollection<MemeDTO> memeDTOs = new List<MemeDTO>();
+
+            // convert all memes to MemeDTOs
+            foreach (Meme m in memes)
+            {
+                //create a new MemeDTO
+                MemeDTO memedto = new MemeDTO();
+
+                //copy all values into the MemeDTOs
+                memedto.MemeId = m.MemeId;
+                memedto.PersonId = m.PersonId;
+                memedto.UploadDate = m.UploadDate;
+
+                //call method to conver the byte[] to a string
+                var imageString = mapper.ConvertByteArrayToImageString(m.MemeByteArray);
+                memedto.MemeString = imageString;
+            }
+            return memeDTOs;
+        }
     }// end of class
 }// end of namespace
