@@ -5,7 +5,8 @@ using models;
 
 namespace Repository
 {
-    //THe job of this 
+    //The job of this class is to ONLY deal with the Db and whatever 
+    // specific logic is related to that.
     public class MemeSaverRepo
     {
         private readonly memeSaverContext _context;
@@ -17,21 +18,16 @@ namespace Repository
 
         public Person Login(Person user)
         {
-            /**use the context to call the Db 
-            and query for the first usr that matches 
-            the first and last name*/
-            //Person user = context.Person.FirstOrDefault(p => p.Fname == user.Fname && p.Lname == user.Lname);
+            /**use the context to call the Db and query for the first user that
+            matches the first and last name*/
             Person user1 = new Person()
             {
                 Fname = "Jerry",
                 Lname = "Walker"
             };
-
             user.Fname += user1.Fname;
             user.Lname += user1.Lname;
-
             return user;
-
         }
 
         /// <summary>
