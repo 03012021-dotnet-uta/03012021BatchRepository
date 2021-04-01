@@ -1,5 +1,8 @@
+using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using models;
 
 namespace BusinessLogic
@@ -31,6 +34,25 @@ namespace BusinessLogic
             return hashedPassword;
         }
 
+        public byte[] ConvertMemeIformfileToByteArray(IFormFile meme)
+        {
+            byte[] memeBytes;
+            // convert the iformfile to a byte array.
+            using (MemoryStream ms = new MemoryStream())
+            {
+                //this section to for converting to a byte Array
+                meme.CopyTo(ms); // copy the contents of the file to the memoryStream obj
+                memeBytes = ms.ToArray();// convert the memory stream to a byte array
+            }
+            return memeBytes;
+        }
+
+        public string ConvertByteArrayToImageString(byte[] byteArray)
+        {
+            string memeString = Convert.ToBase64String(byteArray, 0, byteArray.Length); //                
+            string imageDataString = string.Format($"data:image/jpg;base64,{memeString}");
+            return imageDataString;
+        }
 
 
 

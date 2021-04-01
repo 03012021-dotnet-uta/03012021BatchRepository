@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using models;
 
@@ -80,6 +81,18 @@ namespace Repository
         {
             // add addittional syeps before saving changes... based on changed needs.
             _context.SaveChanges();
+        }
+
+        public bool InsertMeme(Meme meme1)
+        {
+            var result = _context.Memes.Add(meme1);
+            return true;
+        }
+
+        public ICollection<Meme> Memes()
+        {
+            ICollection<Meme> memes = _context.Memes.ToList();
+            return memes;
         }
 
 

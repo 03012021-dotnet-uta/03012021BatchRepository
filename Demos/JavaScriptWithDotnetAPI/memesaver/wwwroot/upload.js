@@ -23,8 +23,10 @@ formuploadmeme.addEventListener('submit', (e) => {
     })
     .then(text => {
       // insert the image tag to the image div.
-      const html = `<img src="${text}" alt="No Image Found" style="height:150px" />`;
-      memeimage.innerHTML = html;
+      // const html = `<img src="${text}" alt="No Image Found" style="height:150px" />`;
+      // memeimage.innerHTML = html;
+      memeimage.innerHTML = `Was your upload successful? -- ${text}`;
+      location = 'personmenu.html';// 
     })
     .catch(err => console.error(err));
 });
