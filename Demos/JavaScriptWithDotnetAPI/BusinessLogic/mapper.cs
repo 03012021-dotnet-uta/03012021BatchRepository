@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using models;
 
@@ -26,6 +27,13 @@ namespace BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Thie method takes a password string and byte[] representing the hashKey(salt)
+        /// and returns a byte[] of the hashed password
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public byte[] HashTheUsername(string password, byte[] key)
         {
             using HMACSHA512 hmac = new HMACSHA512(key: key);// you can assign the key manually instead of using the auto-generated one that comes with the HMAC instance.
@@ -34,14 +42,14 @@ namespace BusinessLogic
             return hashedPassword;
         }
 
-        public byte[] ConvertMemeIformfileToByteArray(IFormFile meme)
+        public async Task<byte[]> ConvertMemeIformfileToByteArrayAsync(IFormFile meme)
         {
             byte[] memeBytes;
             // convert the iformfile to a byte array.
             using (MemoryStream ms = new MemoryStream())
             {
                 //this section to for converting to a byte Array
-                meme.CopyTo(ms); // copy the contents of the file to the memoryStream obj
+                await meme.CopyToAsync(ms); // copy the contents of the file to the memoryStream obj
                 memeBytes = ms.ToArray();// convert the memory stream to a byte array
             }
             return memeBytes;

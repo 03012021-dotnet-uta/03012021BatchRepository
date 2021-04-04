@@ -23,7 +23,7 @@ namespace memesaver
         }
 
         [HttpPost("register")]
-        public ActionResult<Person> Register(RawPerson rawperson)
+        public async Task<ActionResult<Person>> RegisterAsync(RawPerson rawperson)
         {
             Person person = new Person();
             if (!ModelState.IsValid)// did the conversion from JS to C# work?
@@ -35,7 +35,7 @@ namespace memesaver
             {
                 // here you will use the bussiness logic layer instance to pass the data to that layer and eventually save it to the Db.
                 //Console.WriteLine($"{rawperson.Fname}, {rawperson.Lname}");
-                person = _business.Register(rawperson);
+                person = await _business.RegisterAsync(rawperson);
             }
 
             //check if person is null!!!
@@ -49,7 +49,7 @@ namespace memesaver
         // THIS IS AN ACTION METHOD
         // GET: api/<MemeController>
         [HttpGet("login/{username}/{password}")]
-        public ActionResult<Person> Login(string username, string password)
+        public async Task<ActionResult<Person>> LoginAsync(string username, string password)
         {
             // return new string[] { "Mark", "Moore" };
             //here we will do mich the same as in the register.....
@@ -63,7 +63,7 @@ namespace memesaver
             {
                 // here you will use the bussiness logic layer instance to pass the data to that layer and eventually save it to the Db.
                 //Console.WriteLine($"{rawperson.Fname}, {rawperson.Lname}");
-                person = _business.Login(username, password);
+                person = await _business.LoginAsync(username, password);
             }
 
             //check if person is null!!!
@@ -75,20 +75,20 @@ namespace memesaver
         }
 
         [HttpPost("editprofile")]
-        public ActionResult<bool> EditProfile([FromBody] EditPerson editPerson)
+        public async Task<ActionResult<bool>> EditProfileAsync([FromBody] EditPerson editPerson)
         {
             //Console.WriteLine($"\n\nEditPerson is {editPerson.Fname}, {editPerson.Lname}, {editPerson.NewPassword}, {editPerson.NewUsername}, {editPerson.Username}, {editPerson.PasswordHash}\n\n");
             //return new EmptyResult();
 
-            _business.Editperson(editPerson);
+            await _business.EditpersonAsync(editPerson);
 
             return true;
         }
 
         [HttpPost("memeupload")]
-        public ActionResult<bool> Memeupload([FromForm] Guid personId, [FromForm] IFormFile meme)
+        public async Task<ActionResult<bool>> MemeuploadAsync([FromForm] Guid personId, [FromForm] IFormFile meme)
         {
-            bool success = _business.AddMeme(personId, meme);
+            bool success = await _business.AddMemeAsync(personId, meme);
             if (!success)
             {
                 return BadRequest();
@@ -97,11 +97,10 @@ namespace memesaver
         }
 
         [HttpGet("memes")]
-        public ActionResult<ICollection<MemeDTO>> Memes()
+        public async Task<ActionResult<ICollection<MemeDTO>>> MemesAsync()
         {
-            ICollection<MemeDTO> memes = _business.Memes();
+            ICollection<MemeDTO> memes = await _business.MemesAsync();
             return Ok(memes);
-
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using models;
 using Repository;
@@ -23,34 +24,34 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="x"></param>
         /// <returns type="int"></returns>
-        public int QuadrupleTheInt(int x)
-        {
-            int y = 0;
-            y += x;
-            x += y;
-            x *= 2;
-            return x;
+        // public int QuadrupleTheInt(int x)
+        // {
+        //     int y = 0;
+        //     y += x;
+        //     x += y;
+        //     x *= 2;
+        //     return x;
 
-            //return x * 4;
-        }
+        //     //return x * 4;
+        // }
 
         /// <summary>
         /// This method takes a user and returns a verified user, if it exists.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public Person Login(Person user)
-        {
-            //call a method on the repository class that will query the Db
-            // and return the verified person, if he exists.
-            // otherwise return a Person with empty strings.
-            user.Fname += user.Lname;
-            user.Lname += user.Fname;
+        // public Person Login(Person user)
+        // {
+        //     //call a method on the repository class that will query the Db
+        //     // and return the verified person, if he exists.
+        //     // otherwise return a Person with empty strings.
+        //     user.Fname += user.Lname;
+        //     user.Lname += user.Fname;
 
-            Person user1 = _repolayer.Login(user);
+        //     Person user1 = _repolayer.Login(user);
 
-            return user1;
-        }
+        //     return user1;
+        // }
 
         /// <summary>
         /// This method takes a RawPerson representing a new users data.
@@ -59,13 +60,12 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="rawPerson"></param>
         /// <returns></returns>
-        public Person Register(RawPerson rawPerson)
+        public async Task<Person> RegisterAsync(RawPerson rawPerson)
         {
-            if (_repolayer.UserExists(rawPerson.Username) == true)
+            if (await _repolayer.UserExistsAsync(rawPerson.Username) == true)
             {
                 return null;
             }
-            else
             {
                 //convert this rawperson to a Person
                 // send in the submitted password and get back a Person obj with the hashed password and key for it.
@@ -75,7 +75,7 @@ namespace BusinessLogic
                 newPerson.Fname = rawPerson.Fname;
                 newPerson.Lname = rawPerson.Lname;
                 newPerson.UserName = rawPerson.Username;
-                Person registeredPerson = _repolayer.Register(newPerson);//call a method on the repo layer to save the new person to the DB.
+                Person registeredPerson = await _repolayer.RegisterAsync(newPerson);//call a method on the repo layer to save the new person to the DB.
                 return registeredPerson;
             }
         }
@@ -88,16 +88,16 @@ namespace BusinessLogic
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public Person Login(string username, string password)
+        public async Task<Person> LoginAsync(string username, string password)
         {
-            if (_repolayer.UserExists(username) == false)
+            if (await _repolayer.UserExistsAsync(username) == false)
             {
                 return null;
             }
             else
             {
                 //get the matching user with this Username
-                Person foundPerson = _repolayer.GetPersonByUsername(username);
+                Person foundPerson = await _repolayer.GetPersonByUsernameAsync(username);
 
                 // hash the provided password with the key from the found user
                 byte[] hash = mapper.HashTheUsername(password, foundPerson.PasswordSalt);
@@ -143,10 +143,10 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="editPerson"></param>
         /// <returns></returns>
-        public bool Editperson(EditPerson editPerson)
+        public async Task<bool> EditpersonAsync(EditPerson editPerson)
         {
             //get the person by personId 
-            Person dbPerson = _repolayer.GetPersonByUsername(editPerson.Username);
+            Person dbPerson = await _repolayer.GetPersonByUsernameAsync(editPerson.Username);
 
             if (dbPerson == null)
             {
@@ -170,7 +170,7 @@ namespace BusinessLogic
             dbPerson.UserName = editPerson.NewUsername;
 
             //save changed person to the Db.
-            _repolayer.SaveChanges();
+            await _repolayer.SaveChangesAsync();
             return true;
 
         }
@@ -181,29 +181,26 @@ namespace BusinessLogic
         /// Otherwise returns false.
         /// /// </summary>
         /// <returns></returns>
-        public bool AddMeme(Guid personId, IFormFile meme)
+        public async Task<bool> AddMemeAsync(Guid personId, IFormFile meme)
         {
             // create a new Meme instance
             Meme meme1 = new Meme();
-            byte[] memeBytes = mapper.ConvertMemeIformfileToByteArray(meme);
+            byte[] memeBytes = await mapper.ConvertMemeIformfileToByteArrayAsync(meme);
 
             //now pupulate the Meme instance 
             meme1.MemeByteArray = memeBytes;
             meme1.PersonId = personId;
 
             // call the context method to insert the new meme
-            _repolayer.InsertMeme(meme1);
-            _repolayer.SaveChanges();
-            // this section is for convertying from a byte array to a string
-
-
+            await _repolayer.InsertMemeAsync(meme1);
+            await _repolayer.SaveChangesAsync();
             return true;
         }
 
-        public ICollection<MemeDTO> Memes()
+        public async Task<ICollection<MemeDTO>> MemesAsync()
         {
             // get all the memes from the DB.
-            ICollection<Meme> memes = _repolayer.Memes();
+            ICollection<Meme> memes = await _repolayer.MemesAsync();
             ICollection<MemeDTO> memeDTOs = new List<MemeDTO>();
 
             // convert all memes to MemeDTOs
