@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using models;
 
 namespace Repository
@@ -16,19 +18,19 @@ namespace Repository
             this._context = context;
         }
 
-        public Person Login(Person user)
-        {
-            /**use the context to call the Db and query for the first user that
-            matches the first and last name*/
-            Person user1 = new Person()
-            {
-                Fname = "Jerry",
-                Lname = "Walker"
-            };
-            user.Fname += user1.Fname;
-            user.Lname += user1.Lname;
-            return user;
-        }
+        // public Person Login(Person user)
+        // {
+        //     /**use the context to call the Db and query for the first user that
+        //     matches the first and last name*/
+        //     Person user1 = new Person()
+        //     {
+        //         Fname = "Jerry",
+        //         Lname = "Walker"
+        //     };
+        //     user.Fname += user1.Fname;
+        //     user.Lname += user1.Lname;
+        //     return user;
+        // }
 
         /// <summary>
         /// Takes a username and returns true if the username is found in the Db.
@@ -36,10 +38,10 @@ namespace Repository
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public bool UserExists(string userName)
+        public async Task<bool> UserExistsAsync(string userName)
         {
             //default is NULL
-            if (_context.Persons.Where(p => p.UserName == userName).FirstOrDefault() != null)
+            if (await _context.Persons.Where(p => p.UserName == userName).FirstOrDefaultAsync() != null)
             {
                 return true;
             }
@@ -54,11 +56,11 @@ namespace Repository
         /// </summary>
         /// <param name="newPerson"></param>
         /// <returns></returns>
-        public Person Register(Person newPerson)
+        public async Task<Person> RegisterAsync(Person newPerson)
         {
-            var newPerson1 = _context.Persons.Add(newPerson);// addd the new person to the Db
-            _context.SaveChanges();// save the change.
-            return _context.Persons.FirstOrDefault(p => p.PersonId == newPerson.PersonId);// default is null
+            var newPerson1 = _context.Persons.AddAsync(newPerson);// addd the new person to the Db
+            await _context.SaveChangesAsync();// save the change.
+            return await _context.Persons.FirstOrDefaultAsync(p => p.PersonId == newPerson.PersonId);// default is null
         }
 
         /// <summary>
@@ -67,27 +69,27 @@ namespace Repository
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public Person GetPersonByUsername(string username)
+        public async Task<Person> GetPersonByUsernameAsync(string username)
         {
-            Person foundPerson = _context.Persons.FirstOrDefault(p => p.UserName == username);
+            Person foundPerson = await _context.Persons.FirstOrDefaultAsync(p => p.UserName == username);
             return foundPerson;
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
             // add addittional syeps before saving changes... based on changed needs.
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public bool InsertMeme(Meme meme1)
+        public async Task<bool> InsertMemeAsync(Meme meme1)
         {
-            var result = _context.Memes.Add(meme1);
+            var result = await _context.Memes.AddAsync(meme1);
             return true;
         }
 
-        public ICollection<Meme> Memes()
+        public async Task<ICollection<Meme>> MemesAsync()
         {
-            ICollection<Meme> memes = _context.Memes.ToList();
+            ICollection<Meme> memes = await _context.Memes.ToListAsync();
             return memes;
         }
 
