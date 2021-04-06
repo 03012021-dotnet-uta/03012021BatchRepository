@@ -1,0 +1,19 @@
+<p>persondetails works!</p>
+
+<div *ngIf="person2">
+  <h2>The passed down person is _{{person2.username}} {{person2.password}}_.</h2>
+
+  <h3>Now chagne the first and last name to emit this data to the parent.</h3>
+
+  <form class="changedPerson">
+    <label for="fname">First Name:</label>
+    <input type="text" placeholder="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" placeholder="lname" name="lname">
+    <label for="username">UserName:</label>
+    <input type="text" placeholder="{{person2.username}}" value="{{person2.username}}" name="username">
+    <label for="password">Password:</label>
+    <input type="text" placeholder="{{person2.password}}" value="{{person2.password}}" name="password">
+    <input type="submit" value="Submit" (click)=PassChangedPerson()>
+  </form>
+</div>

@@ -1,0 +1,43 @@
+<p>This is login component</p>
+
+<!-- <form>
+  <label for="username">Username:</label>
+  <input type="text" placeholder="Username" name='username' [(ngModel)]="username">
+  <label for="password">Password:</label>
+  <input type="text" placeholder="Password" name="password" [(ngModel)]="password">
+</form> -->
+
+<form class="loginform">
+  <label for="username">Username:</label>
+  <input type="text" placeholder="Username" name="username" [(ngModel)]="username">&nbsp;
+  <label for="password">Password:</label>
+  <input type="text" placeholder="Password" name="password" [(ngModel)]="password">&nbsp;
+  <input type="submit" value="Submit" (click)=login()>
+</form>
+This is the Username => {{username}} <= in login component This is the Password=> {{password}}
+  <br>
+  <br>
+  <form class="loginform1">
+    <label for="fname">First Name:</label>
+    <input type="text" placeholder="fname" name="fname">&nbsp;
+    <label for="lname">Password:</label>
+    <input type="text" placeholder="lname" name="lname">&nbsp;
+    <label for="username1">Username:</label>
+    <input type="text" placeholder="Username" name="username1">&nbsp;
+    <label for="password">Password:</label>
+    <input type="text" placeholder="Password" name="password1">&nbsp;
+    <input type="submit" value="Submit" (click)=login()>
+  </form>
+  <div>
+    This is the Person.Username is {{person1.username}}, and in login component This is the person1.Password is
+    {{person1.password}} in login component.
+  </div>
+
+  <div *ngIf="changedPerson">
+    <h5 style="background-color: pink;"> This is the new changedPerson {{changedPerson.fname}},
+      {{changedPerson.lname}},{{changedPerson.username}},{{changedPerson.password}}</h5>
+  </div>
+
+
+
+  <app-persondetails [person2]='person1' (person3)=ChangedPerson($event)></app-persondetails>

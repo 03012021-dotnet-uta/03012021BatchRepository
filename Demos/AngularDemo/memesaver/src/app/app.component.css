@@ -1,0 +1,10 @@
+.title{
+  text-align: center;
+  /* background-color: blueviolet; */
+  /* width: 500px; */
+}
+
+.title h1{
+  background-color: blueviolet;
+  display: inline;
+}
