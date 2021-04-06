@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using BusinessLogic;
 using Microsoft.EntityFrameworkCore;
 using models;
@@ -19,7 +20,7 @@ namespace memesaver.tests
 
 
         [Fact]
-        public void ContextRegisterAddsANewUserToTheDb()
+        public async Task ContextRegisterAddsANewUserToTheDbAsync()
         {
             // ARRANGE - create the data to insert into the Db
             //create the new Person seed
@@ -44,7 +45,7 @@ namespace memesaver.tests
 
                 //create the MemeSaverRepo instance
                 MemeSaverRepo msr = new MemeSaverRepo(context1);
-                resultPerson1 = msr.Register(testPerson);
+                resultPerson1 = await msr.RegisterAsync(testPerson);
                 context1.SaveChanges();
             }
 
