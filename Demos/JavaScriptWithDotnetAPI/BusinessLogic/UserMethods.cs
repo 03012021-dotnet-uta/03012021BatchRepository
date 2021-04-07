@@ -20,43 +20,9 @@ namespace BusinessLogic
         }
 
         /// <summary>
-        /// This method takes an int and returns four times the int.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <returns type="int"></returns>
-        // public int QuadrupleTheInt(int x)
-        // {
-        //     int y = 0;
-        //     y += x;
-        //     x += y;
-        //     x *= 2;
-        //     return x;
-
-        //     //return x * 4;
-        // }
-
-        /// <summary>
-        /// This method takes a user and returns a verified user, if it exists.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        // public Person Login(Person user)
-        // {
-        //     //call a method on the repository class that will query the Db
-        //     // and return the verified person, if he exists.
-        //     // otherwise return a Person with empty strings.
-        //     user.Fname += user.Lname;
-        //     user.Lname += user.Fname;
-
-        //     Person user1 = _repolayer.Login(user);
-
-        //     return user1;
-        // }
-
-        /// <summary>
         /// This method takes a RawPerson representing a new users data.
         /// It returns the Person instance created in the database if the creation was successfull.
-        /// Otherwise returns false.
+        /// /// Otherwise returns false.
         /// </summary>
         /// <param name="rawPerson"></param>
         /// <returns></returns>
@@ -66,7 +32,8 @@ namespace BusinessLogic
             {
                 return null;
             }
-            else{
+            else
+            {
                 //convert this rawperson to a Person
                 // send in the submitted password and get back a Person obj with the hashed password and key for it.
                 Person newPerson = mapper.GetANewPersonWithHashedPassword(rawPerson.Password);
@@ -88,7 +55,7 @@ namespace BusinessLogic
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<Person> LoginAsync(string username, string password)
+        public async Task<StringPerson> LoginAsync(string username, string password)
         {
             if (await _repolayer.UserExistsAsync(username) == false)
             {
@@ -100,13 +67,23 @@ namespace BusinessLogic
                 Person foundPerson = await _repolayer.GetPersonByUsernameAsync(username);
 
                 // hash the provided password with the key from the found user
-                byte[] hash = mapper.HashTheUsername(password, foundPerson.PasswordSalt);
+                byte[] hash = mapper.HashThePassword(password, foundPerson.PasswordSalt);
 
                 // compare the 2 hashes with a external method
                 // if the 2 hashes match return the found user.
                 if (CompareTwoHashes(foundPerson.PasswordHash, hash))
                 {
-                    return foundPerson;
+                    //convert found person to a StringPerson
+                    StringPerson stringPerson = new StringPerson()
+                    {
+                        Fname = foundPerson.Fname,
+                        Lname = foundPerson.Lname,
+                        MemberSince = foundPerson.MemberSince,
+                        PasswordHash = Convert.ToBase64String(hash, 0, hash.Length),
+                        PersonId = foundPerson.PersonId.ToString(),
+                        UserName = foundPerson.UserName
+                    };
+                    return stringPerson;
                 }
                 else return null;
             }
@@ -154,12 +131,12 @@ namespace BusinessLogic
             }
 
             // compare Db personhash with received hash to verify it's the same GetPersonByUsername
-            if (!CompareTwoHashes(dbPerson.PasswordHash, editPerson.PasswordHash)) return false;// when your body is just one line, you can disregard using the {}
+            if (!CompareTwoHashes(dbPerson.PasswordHash, Convert.FromBase64String(editPerson.PasswordHash))) return false;// when your body is just one line, you can disregard using the {}
 
             // hash the new password (if not null) and save it to the DbPerson
             if (editPerson.NewPassword != "")
             {
-                byte[] hash = mapper.HashTheUsername(editPerson.NewPassword, dbPerson.PasswordSalt);
+                byte[] hash = mapper.HashThePassword(editPerson.NewPassword, dbPerson.PasswordSalt);
                 dbPerson.PasswordHash = hash;
             }
 

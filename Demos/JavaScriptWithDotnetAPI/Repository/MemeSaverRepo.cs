@@ -18,20 +18,6 @@ namespace Repository
             this._context = context;
         }
 
-        // public Person Login(Person user)
-        // {
-        //     /**use the context to call the Db and query for the first user that
-        //     matches the first and last name*/
-        //     Person user1 = new Person()
-        //     {
-        //         Fname = "Jerry",
-        //         Lname = "Walker"
-        //     };
-        //     user.Fname += user1.Fname;
-        //     user.Lname += user1.Lname;
-        //     return user;
-        // }
-
         /// <summary>
         /// Takes a username and returns true if the username is found in the Db.
         /// Otherwise returns false.
