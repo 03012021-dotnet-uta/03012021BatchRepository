@@ -23,6 +23,16 @@ namespace memesaver
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors((options) =>
+            {
+                options.AddPolicy(name: "dev", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
             // get the connection string from the user secrets.
             // this code is setting up the communication with the database
             // WE HAVE NOT UTILIZED ENTITY FRAMEWORK YET.
@@ -72,6 +82,8 @@ namespace memesaver
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors("dev");//you must have this for cors to work
 
             app.UseAuthorization();
 

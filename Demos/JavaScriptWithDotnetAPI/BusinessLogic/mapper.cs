@@ -34,7 +34,7 @@ namespace BusinessLogic
         /// <param name="password"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public byte[] HashTheUsername(string password, byte[] key)
+        public byte[] HashThePassword(string password, byte[] key)
         {
             using HMACSHA512 hmac = new HMACSHA512(key: key);// you can assign the key manually instead of using the auto-generated one that comes with the HMAC instance.
 
