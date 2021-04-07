@@ -28,7 +28,7 @@ namespace memesaver
             // WE HAVE NOT UTILIZED ENTITY FRAMEWORK YET.
             // SO THIS IS JUST HOLDING THE PLACE FOR THAT
             // THIS CODE DOES NOTHING RIGHT NOW.
-            string connectionString = Configuration.GetConnectionString("memeDb");
+            string connectionString = Configuration.GetConnectionString("memeDbAzure");
 
             // add the Db context
             // services.AddDbContext<memeSaverContext>();

@@ -8,22 +8,21 @@ const uploadmeme = document.querySelector('#uploadmeme');
 
 //create an IIFE that will retrieve the Person from localStrorage and populate the page.
 const user = JSON.parse(localStorage.getItem('person'));
-// const person = localStorage.getItem('person');
 // console.log(person);
 console.log(user);
 
 
 editprofile.addEventListener('click', () => {
-  console.log('editprofile eventlistener works')
+	console.log('editprofile eventlistener works')
 
 });
 
 viewmemes.addEventListener('click', () => {
-  console.log('viewmemes eventlistener works')
+	console.log('viewmemes eventlistener works')
 
 });
 
 uploadmeme.addEventListener('click', () => {
-  console.log('uploadmeme eventlistener works')
+	console.log('uploadmeme eventlistener works')
 
 });
