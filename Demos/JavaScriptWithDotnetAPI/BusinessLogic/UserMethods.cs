@@ -66,7 +66,7 @@ namespace BusinessLogic
             {
                 return null;
             }
-            {
+            else{
                 //convert this rawperson to a Person
                 // send in the submitted password and get back a Person obj with the hashed password and key for it.
                 Person newPerson = mapper.GetANewPersonWithHashedPassword(rawPerson.Password);
