@@ -62,7 +62,19 @@ namespace BusinessLogic
             return imageDataString;
         }
 
-
+        public StringPersonDTO ConvertPersonToStringPerson(Person person)
+        {
+            StringPersonDTO stringPerson = new StringPersonDTO()
+            {
+                Fname = person.Fname,
+                Lname = person.Lname,
+                MemberSince = person.MemberSince,
+                PasswordHash = Convert.ToBase64String(person.PasswordHash, 0, person.PasswordHash.Length),
+                PersonId = person.PersonId.ToString(),
+                UserName = person.UserName
+            };
+            return stringPerson;
+        }
 
     }// end of class
 }// end of namespace

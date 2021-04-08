@@ -40,9 +40,9 @@
     <input type="text" placeholder="{{person2.userName}}" value="{{person2.userName}}" name="username">
     <label for="password">New Password:</label>
     <input type="text" placeholder="{{person2.password}}" value="" name="username">
-    <input type="text" placeholder="{{person2.passwordHash}}" value="{{person2.passwordHash}}" name="password">
-    <input type="text" value="{{person2.personId}}" value="{{person2.personId}}" name="password">
-    <input type="text" value="{{person2.Username}}" value="{{person2.userName}}" name="">
+    <input type="text" placeholder="{{person2.passwordHash}}" value="{{person2.passwordHash}}" name="password" hidden>
+    <input type="text" value="{{person2.personId}}" value="{{person2.personId}}" name="password" hidden>
+    <input type="text" value="{{person2.Username}}" value="{{person2.userName}}" name="" hidden>
 
     <input type="submit" value="Submit" (click)=PassChangedPerson()>
   </form>

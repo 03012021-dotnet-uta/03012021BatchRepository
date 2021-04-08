@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace models
 {
-    public class StringPerson
+    public class StringPersonDTO
     {
         public string PersonId { get; set; }
         public string Fname { get; set; }

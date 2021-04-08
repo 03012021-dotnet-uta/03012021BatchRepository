@@ -49,11 +49,11 @@ namespace memesaver
         // THIS IS AN ACTION METHOD
         // GET: api/<MemeController>
         [HttpGet("login/{username}/{password}")]
-        public async Task<ActionResult<StringPerson>> LoginAsync(string username, string password)
+        public async Task<ActionResult<StringPersonDTO>> LoginAsync(string username, string password)
         {
             // return new string[] { "Mark", "Moore" };
             //here we will do mich the same as in the register.....
-            StringPerson person = new StringPerson();
+            StringPersonDTO person = new StringPersonDTO();
             if (!ModelState.IsValid)// did the conversion from JS to C# work?
             {
                 // return StatusCode(409, $"User '{rawPerson.UserName}' already exists.");
@@ -116,23 +116,20 @@ namespace memesaver
             return Ok(memes);
         }
 
+        [HttpGet("allpersons")]
+        public async Task<ActionResult<StringPersonDTO>> GetAllPeopleAsync()
+        {
+            //best practice is to check the value at each step to make sure you have a value and that it is in range.
+            List<StringPersonDTO> people = await _business.GetAllPeopleAsync();
+            return Ok(people);
+        }
+
+        [HttpGet("getpersonbyid/{personId}")]
+        public async Task<ActionResult<StringPersonDTO>> GetPersonByIdAsync(string personId)
+        {
+            StringPersonDTO stringPerson = await _business.GetPersonByIdAsync(personId);
+            return Ok(stringPerson);
+        }
 
     }//end of class
 }//end of namespace
-
-
-// if (meme.Length > 0)
-// {
-//     using (MemoryStream ms = new MemoryStream())
-//     {
-//         //this section to for converting to a byte Array
-//         meme.CopyTo(ms); // copy thre contents of the file to the ememoryStream obj
-//         byte[] memeBytes = ms.ToArray();// convert the memory dstrezm to a byte array
-
-
-//         // this section is for convertying from a byte array to a string
-//         string memeString = Convert.ToBase64String(memeBytes, 0, memeBytes.Length); //                
-//         string imageDataString = string.Format($"data:image/jpg;base64,{memeString}");
-//         return imageDataString;
-//     }
-// }
