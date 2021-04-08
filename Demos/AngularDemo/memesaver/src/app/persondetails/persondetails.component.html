@@ -1,19 +1,49 @@
 <p>persondetails works!</p>
 
-<div *ngIf="person2">
-  <h2>The passed down person is _{{person2.username}} {{person2.password}}_.</h2>
+<!-- <div *ngIf="person2">
+  <h2>The passed down person is _{{person2.fname}} {{person2.lname}}_.</h2>
 
-  <h3>Now chagne the first and last name to emit this data to the parent.</h3>
+  <h3>Now change the data to emit this data to the parent and then to the Db.</h3>
 
   <form class="changedPerson">
     <label for="fname">First Name:</label>
-    <input type="text" placeholder="fname" name="fname">
+    <input type="text" placeholder="fname" name="fname" value="{{person2.fname}}">
     <label for="lname">Last Name:</label>
-    <input type="text" placeholder="lname" name="lname">
-    <label for="username">UserName:</label>
+    <input type="text" placeholder="lname" name="lname" value="{{person2.lname}}">
+    <label for="username">New UserName:</label>
     <input type="text" placeholder="{{person2.username}}" value="{{person2.username}}" name="username">
-    <label for="password">Password:</label>
-    <input type="text" placeholder="{{person2.password}}" value="{{person2.password}}" name="password">
+    <label for="password">New Password:</label>
+    <input type="text" placeholder="{{person2.password}}" value="" name="password">
+
+    <!-- have hidden values here to send back with the form -->
+<!--<input type="text" value="{{person2.personId}}" name="password" hidden>
+<input type="text" value="{{person2.PasswordHash}}" name="password" hidden>
+<input type="text" value="{{person2.username}}" name="password" hidden>
+
+
+<input type="submit" value="Submit" (click)=PassChangedPerson()>
+</form>
+</div> -->
+
+<div *ngIf="person2">
+  <h2>The passed down person is _{{person2.fname}} {{person2.lname}}_.</h2>
+
+  <h3>Now change the some info to emit this data to the parent and change it on the Db.</h3>
+  <h4>Their info is {{person2 | json}}</h4>
+
+  <form class="changedPerson">
+    <label for="fname">First Name:</label>
+    <input type="text" placeholder="{{person2.fname | uppercase}}" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" placeholder="{{person2.lname}}" name="lname">
+    <label for="username">New UserName:</label>
+    <input type="text" placeholder="{{person2.userName}}" value="{{person2.userName}}" name="username">
+    <label for="password">New Password:</label>
+    <input type="text" placeholder="{{person2.password}}" value="" name="username">
+    <input type="text" placeholder="{{person2.passwordHash}}" value="{{person2.passwordHash}}" name="password">
+    <input type="text" value="{{person2.personId}}" value="{{person2.personId}}" name="password">
+    <input type="text" value="{{person2.Username}}" value="{{person2.userName}}" name="">
+
     <input type="submit" value="Submit" (click)=PassChangedPerson()>
   </form>
 </div>

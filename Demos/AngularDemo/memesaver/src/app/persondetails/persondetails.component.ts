@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Guid } from 'guid-typescript';
+import { EditPerson } from '../edit-person';
 import { Person } from '../person';
+import { StringPerson } from '../string-person';
 
 @Component({
   selector: 'app-persondetails',
@@ -7,8 +10,8 @@ import { Person } from '../person';
   styleUrls: ['./persondetails.component.css']
 })
 export class PersondetailsComponent implements OnInit {
-  @Input() person2?: Person;
-  @Output() person3 = new EventEmitter<Person>();//this is an event emitter .. not a Person
+  @Input() person2?: StringPerson;
+  @Output() person3 = new EventEmitter<EditPerson>();//this is an event emitter .. not a Person
   constructor() { }
 
   ngOnInit(): void {
@@ -18,11 +21,14 @@ export class PersondetailsComponent implements OnInit {
   PassChangedPerson() {
     const form1 = document.querySelector('.changedPerson');
     const inputArr = form1.querySelectorAll('input');
-    const p1 = new Person();
-    p1.fname = inputArr[0].value;
-    p1.lname = inputArr[1].value;
-    p1.username = inputArr[2].value;
-    p1.password = inputArr[3].value;
+    const p1 = new EditPerson();
+    p1.Fname = inputArr[0].value;
+    p1.Lname = inputArr[1].value;
+    p1.NewUsername = inputArr[2].value;
+    p1.NewPassword = inputArr[3].value;
+    p1.PersonId = inputArr[5].value;
+    p1.PasswordHash = inputArr[4].value;
+    p1.Username = inputArr[6].value;
 
     this.person3.emit(p1);
 

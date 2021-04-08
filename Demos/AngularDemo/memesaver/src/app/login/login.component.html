@@ -15,7 +15,13 @@
   <input type="submit" value="Submit" (click)=login()>
 </form>
 This is the Username => {{username}} <= in login component This is the Password=> {{password}}
-  <br>
+  <hr>
+  <div *ngIf="stringPerson" style="background-color: aqua;width: 200px;">
+    <h3>The person returned has first name of == {{stringPerson.fname}}</h3>
+  </div>
+
+
+  <!-- <br>
   <br>
   <form class="loginform1">
     <label for="fname">First Name:</label>
@@ -31,13 +37,13 @@ This is the Username => {{username}} <= in login component This is the Password=
   <div>
     This is the Person.Username is {{person1.username}}, and in login component This is the person1.Password is
     {{person1.password}} in login component.
-  </div>
+  </div> -->
 
   <div *ngIf="changedPerson">
-    <h5 style="background-color: pink;"> This is the new changedPerson {{changedPerson.fname}},
-      {{changedPerson.lname}},{{changedPerson.username}},{{changedPerson.password}}</h5>
+    <h5 style="background-color: pink;"> This is the new changedPerson {{changedPerson.Fname}},
+      {{changedPerson.Lname}},{{changedPerson.Username}},{{changedPerson.NewPassword}}</h5>
   </div>
 
 
 
-  <app-persondetails [person2]='person1' (person3)=ChangedPerson($event)></app-persondetails>
+  <app-persondetails [person2]='stringPerson' (person3)=ChangedPerson($event)></app-persondetails>
