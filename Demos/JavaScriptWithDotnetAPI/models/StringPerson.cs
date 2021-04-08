@@ -6,7 +6,6 @@ namespace models
 {
     public class StringPerson
     {
-        [Key]
         public string PersonId { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
