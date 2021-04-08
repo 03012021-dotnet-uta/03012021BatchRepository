@@ -55,7 +55,7 @@ namespace BusinessLogic
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<StringPerson> LoginAsync(string username, string password)
+        public async Task<StringPersonDTO> LoginAsync(string username, string password)
         {
             if (await _repolayer.UserExistsAsync(username) == false)
             {
@@ -74,15 +74,7 @@ namespace BusinessLogic
                 if (CompareTwoHashes(foundPerson.PasswordHash, hash))
                 {
                     //convert found person to a StringPerson
-                    StringPerson stringPerson = new StringPerson()
-                    {
-                        Fname = foundPerson.Fname,
-                        Lname = foundPerson.Lname,
-                        MemberSince = foundPerson.MemberSince,
-                        PasswordHash = Convert.ToBase64String(hash, 0, hash.Length),
-                        PersonId = foundPerson.PersonId.ToString(),
-                        UserName = foundPerson.UserName
-                    };
+                    StringPersonDTO stringPerson = mapper.ConvertPersonToStringPerson(foundPerson);
                     return stringPerson;
                 }
                 else return null;
@@ -196,6 +188,29 @@ namespace BusinessLogic
                 memedto.MemeString = imageString;
             }
             return memeDTOs;
+        }
+
+        public async Task<List<StringPersonDTO>> GetAllPeopleAsync()
+        {
+            ICollection<Person> people = await _repolayer.GetAllPeopleAsync();
+            List<StringPersonDTO> stringPeople = new List<StringPersonDTO>();
+            //convert all these Persons to StringPerson
+            foreach (var foundPerson in people)
+            {
+                StringPersonDTO p = mapper.ConvertPersonToStringPerson(foundPerson);
+                stringPeople.Add(p);
+            }
+            return stringPeople;
+        }
+
+        public async Task<StringPersonDTO> GetPersonByIdAsync(string personId)
+        {
+            //convert the string to Guid
+            Guid guid = Guid.Parse(personId);
+            //call repo method to get the person by the #if true
+            Person p = await _repolayer.GetPersonByIdAsync(guid);
+            StringPersonDTO sp = mapper.ConvertPersonToStringPerson(p);
+            return sp;
         }
     }// end of class
 }// end of namespace

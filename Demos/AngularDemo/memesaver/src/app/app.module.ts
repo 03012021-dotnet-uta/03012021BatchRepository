@@ -6,17 +6,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { PersondetailsComponent } from './persondetails/persondetails.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ListpersonsComponent } from './listpersons/listpersons.component';
+import { ListimagesComponent } from './listimages/listimages.component';
+import { PersonjustdetailsComponent } from './personjustdetails/personjustdetails.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PersondetailsComponent
+    PersondetailsComponent,
+    ListpersonsComponent,
+    ListimagesComponent,
+    PersonjustdetailsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,10 @@
+<p>Here is your list of People!</p>
+
+<div>
+  <ol>
+    <li *ngFor="let p of personsArray">
+      <button><a routerLink="/personjustdetails/{{p.personId}}">DETAILS</a></button>
+      First Name: {{p.fname}} - - Last Name: {{p.lname}}
+    </li>
+  </ol>
+</div>

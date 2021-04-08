@@ -73,12 +73,30 @@ namespace Repository
             return true;
         }
 
+        /// <summary>
+        /// This method gets all memes and returns them asynchronously.
+        /// </summary>
+        /// <returns></returns>
         public async Task<ICollection<Meme>> MemesAsync()
         {
             ICollection<Meme> memes = await _context.Memes.ToListAsync();
             return memes;
         }
 
+        /// <summary>
+        /// this method gets all the people in the persons table asynchronously
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ICollection<Person>> GetAllPeopleAsync()
+        {
+            ICollection<Person> people = await _context.Persons.ToListAsync();
+            return people;
+        }
 
+        public async Task<Person> GetPersonByIdAsync(Guid guid)
+        {
+            Person p = await _context.Persons.FirstOrDefaultAsync(p => p.PersonId == guid);
+            return p;
+        }
     }//end of class
 }// end of namespace
