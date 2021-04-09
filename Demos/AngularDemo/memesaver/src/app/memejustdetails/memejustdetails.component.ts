@@ -11,7 +11,7 @@ import { MemesaverService } from '../memesaver.service';
 export class MemejustdetailsComponent implements OnInit {
   meme: Meme;
 
-  //yoou need to inject the ActivatedRoute service to use it.
+  //you need to inject the ActivatedRoute service to use it.
   constructor(private memesaverservice: MemesaverService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class MemejustdetailsComponent implements OnInit {
     this.GetMemeById(id);
   }
 
-  GetMemeById(id: string) {
+  GetMemeById(id: string): void {
     this.memesaverservice.GetMemeById(id).subscribe(res => this.meme = res);
 
   }

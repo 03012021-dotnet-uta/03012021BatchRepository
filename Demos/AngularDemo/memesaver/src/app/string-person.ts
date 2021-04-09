@@ -2,7 +2,7 @@ import { Guid } from "guid-typescript";
 import { Meme } from "./meme";
 
 export class StringPerson {
-  personId: Guid;
+  personId: string;
   fname: string;
   lname: string;
   userName: string;
