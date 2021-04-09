@@ -1,11 +1,11 @@
 import { Guid } from "guid-typescript";
 
 export class EditPerson {
-  PersonId: string;
-  Fname: string;
-  Lname: string;
-  Username: string;
-  NewPassword: string;
-  PasswordHash: string;
-  NewUsername: string;
+  personId: string;
+  fname: string;
+  lname: string;
+  username: string;
+  newPassword: string;
+  passwordHash: string;
+  newUsername: string;
 }

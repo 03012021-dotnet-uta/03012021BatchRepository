@@ -22,13 +22,13 @@ export class PersondetailsComponent implements OnInit {
     const form1 = document.querySelector('.changedPerson');
     const inputArr = form1.querySelectorAll('input');
     const p1 = new EditPerson();
-    p1.Fname = inputArr[0].value;
-    p1.Lname = inputArr[1].value;
-    p1.NewUsername = inputArr[2].value;
-    p1.NewPassword = inputArr[3].value;
-    p1.PersonId = inputArr[5].value;
-    p1.PasswordHash = inputArr[4].value;
-    p1.Username = inputArr[6].value;
+    p1.fname = inputArr[0].value;
+    p1.lname = inputArr[1].value;
+    p1.newUsername = inputArr[2].value;
+    p1.newPassword = inputArr[3].value;
+    p1.personId = inputArr[5].value;
+    p1.passwordHash = inputArr[4].value;
+    p1.username = inputArr[6].value;
 
     this.person3.emit(p1);
 

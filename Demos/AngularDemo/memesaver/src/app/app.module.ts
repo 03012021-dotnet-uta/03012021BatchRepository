@@ -11,6 +11,7 @@ import { ListpersonsComponent } from './listpersons/listpersons.component';
 import { ListimagesComponent } from './listimages/listimages.component';
 import { PersonjustdetailsComponent } from './personjustdetails/personjustdetails.component';
 import { MemejustdetailsComponent } from './memejustdetails/memejustdetails.component';
+import { DemoComponent } from './demo/demo.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MemejustdetailsComponent } from './memejustdetails/memejustdetails.comp
     ListpersonsComponent,
     ListimagesComponent,
     PersonjustdetailsComponent,
-    MemejustdetailsComponent
+    MemejustdetailsComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,

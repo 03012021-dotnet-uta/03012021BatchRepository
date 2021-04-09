@@ -143,7 +143,7 @@ namespace memesaver
         public async Task<ActionResult<StringPersonDTO>> GetMemeByIdAsync(string memeId)
         {
             MemeDTO memeDTO = await _business.GetMemeByIdAsync(memeId);
-            return Ok(memeDTO);
+            return Ok(memeDTO); 
         }
 
     }//end of class

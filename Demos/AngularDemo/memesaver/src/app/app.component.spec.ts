@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'memesaver'`, () => {
+  it(`should have as title 'Batch memesaver App'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('memesaver');
+    expect(app.title).toEqual('Batch memesaver App');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('memesaver app is running!');
+    const compiled = fixture.nativeElement; // grab a reference to the document
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Batch memesaver App');
   });
 });
