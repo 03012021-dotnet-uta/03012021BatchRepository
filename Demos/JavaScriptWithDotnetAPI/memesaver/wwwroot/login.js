@@ -29,7 +29,7 @@ loginForm.addEventListener('submit', (event) => {
 			localStorage.setItem('person', JSON.stringify(res));
 			//sessionStorage.setItem('personId', res.personId);
 			//switch the screen
-			location = 'personmenu.html';
+			// location = 'personmenu.html';
 		})
 		.catch(function (err) {
 			console.log('Failed to fetch page: ', err);

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; import { Meme } from '../meme';
+import { MemesaverService } from '../memesaver.service';
 
 @Component({
   selector: 'app-listimages',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listimages.component.css']
 })
 export class ListimagesComponent implements OnInit {
+  memesArray: Meme[];
+  constructor(private memesaverservice: MemesaverService) { }
 
-  constructor() { }
-
+  // all initialization logic goes here in the NgOnInit function
   ngOnInit(): void {
+    this.GetAllMemes();
   }
 
+  GetAllMemes(): void {
+    this.memesaverservice.GetAllMemes().subscribe(res => this.memesArray = res)
+  }
 }

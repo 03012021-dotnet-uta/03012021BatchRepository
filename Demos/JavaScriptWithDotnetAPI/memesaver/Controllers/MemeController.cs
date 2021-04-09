@@ -131,5 +131,20 @@ namespace memesaver
             return Ok(stringPerson);
         }
 
+        [HttpGet("allmemes")]
+        public async Task<ActionResult<StringPersonDTO>> GetAllMemesAsync()
+        {
+            //best practice is to check the value at each step to make sure you have a value and that it is in range.
+            List<MemeDTO> memes = await _business.GetAllMemesAsync();
+            return Ok(memes);
+        }
+
+        [HttpGet("getmemebyid/{memeId}")]
+        public async Task<ActionResult<StringPersonDTO>> GetMemeByIdAsync(string memeId)
+        {
+            MemeDTO memeDTO = await _business.GetMemeByIdAsync(memeId);
+            return Ok(memeDTO);
+        }
+
     }//end of class
 }//end of namespace

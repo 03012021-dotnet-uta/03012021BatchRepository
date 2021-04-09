@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ListpersonsComponent } from './listpersons/listpersons.component';
 import { ListimagesComponent } from './listimages/listimages.component';
 import { PersonjustdetailsComponent } from './personjustdetails/personjustdetails.component';
+import { MemejustdetailsComponent } from './memejustdetails/memejustdetails.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { PersonjustdetailsComponent } from './personjustdetails/personjustdetail
     PersondetailsComponent,
     ListpersonsComponent,
     ListimagesComponent,
-    PersonjustdetailsComponent
+    PersonjustdetailsComponent,
+    MemejustdetailsComponent
   ],
   imports: [
     BrowserModule,
