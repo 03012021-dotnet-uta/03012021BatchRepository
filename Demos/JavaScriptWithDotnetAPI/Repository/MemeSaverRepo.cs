@@ -98,5 +98,17 @@ namespace Repository
             Person p = await _context.Persons.FirstOrDefaultAsync(p => p.PersonId == guid);
             return p;
         }
+
+        public async Task<Meme> GetMemeByIdAsync(Guid guid)
+        {
+            Meme m = await _context.Memes.FirstOrDefaultAsync(p => p.MemeId == guid);
+            return m;
+        }
+
+        public async Task<ICollection<Meme>> GetAllMemesAsync()
+        {
+            ICollection<Meme> memes = await _context.Memes.ToListAsync();
+            return memes;
+        }
     }//end of class
 }// end of namespace

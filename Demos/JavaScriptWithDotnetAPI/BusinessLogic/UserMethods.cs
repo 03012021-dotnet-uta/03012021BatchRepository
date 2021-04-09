@@ -186,6 +186,7 @@ namespace BusinessLogic
                 //call method to conver the byte[] to a string
                 var imageString = mapper.ConvertByteArrayToImageString(m.MemeByteArray);
                 memedto.MemeString = imageString;
+                memeDTOs.Add(memedto);
             }
             return memeDTOs;
         }
@@ -212,5 +213,29 @@ namespace BusinessLogic
             StringPersonDTO sp = mapper.ConvertPersonToStringPerson(p);
             return sp;
         }
+
+        public async Task<MemeDTO> GetMemeByIdAsync(string memeId)
+        {
+            //convert the string to Guid
+            Guid guid = Guid.Parse(memeId);
+            //call repo method to get the person by the #if true
+            Meme m = await _repolayer.GetMemeByIdAsync(guid);
+            MemeDTO memeDto = mapper.ConvertMemeToMemeDto(m);
+            return memeDto;
+        }
+
+        public async Task<List<MemeDTO>> GetAllMemesAsync()
+        {
+            ICollection<Meme> memes = await _repolayer.GetAllMemesAsync();
+            List<MemeDTO> memeDtos = new List<MemeDTO>();
+            //convert all these Persons to StringPerson
+            foreach (Meme m in memes)
+            {
+                MemeDTO mdto = mapper.ConvertMemeToMemeDto(m);
+                memeDtos.Add(mdto);
+            }
+            return memeDtos;
+        }
+
     }// end of class
 }// end of namespace

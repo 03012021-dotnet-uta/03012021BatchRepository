@@ -1,0 +1,19 @@
+<p>memejustdetails works!</p>
+
+
+<div class="memeimage">
+  <ul>
+    <li>
+      <button><a routerLink="/memejustdetails/{{meme.memeId}}">DETAILS</a></button>
+    </li>
+    <li>
+      <img src="{{meme.memeString}}" alt="No Image Found" style="height:150px" />
+    </li>
+    <li>
+      {{meme.uploadDate}}
+    </li>
+    <li>
+      {{meme.personId}}
+    </li>
+  </ul>
+</div>

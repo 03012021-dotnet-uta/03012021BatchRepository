@@ -76,5 +76,17 @@ namespace BusinessLogic
             return stringPerson;
         }
 
+        public MemeDTO ConvertMemeToMemeDto(Meme meme)
+        {
+            MemeDTO memeDto = new MemeDTO()
+            {
+                MemeId = meme.MemeId,
+                MemeString = ConvertByteArrayToImageString(meme.MemeByteArray),
+                PersonId = meme.PersonId,
+                UploadDate = meme.UploadDate
+            };
+            return memeDto;
+        }
+
     }// end of class
 }// end of namespace

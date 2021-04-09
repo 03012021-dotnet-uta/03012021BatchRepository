@@ -41,7 +41,7 @@ registerForm.addEventListener('submit', (e) => {
 			localStorage.setItem('person', JSON.stringify(res));// this is available to the whole browser
 			//sessionStorage.setItem('personId', res);// this is ony vailable to the certain window tab.
 			//switch the screen
-			location = 'personmenu.html';// 
+			// location = 'personmenu.html';// 
 		})
 		.catch(function (err) {
 			console.log('Failed to fetch page: ', err);
