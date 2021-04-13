@@ -1,8 +1,3 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
   branches:
     include:
@@ -10,104 +5,91 @@ trigger:
 #the below is required only if you have multiple .sln files in your repo.
   paths:
     include:
-    - Demos/JavaScriptWithDotnetAPI
-
+    - Demos/AngularDemo/memesaver
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln'
+  solution: 'Demos/AngularDemo/memesaver'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-
-#this installs the newest SDK for this build
 steps:
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
+# - task: SonarCloudPrepare@1
+#   displayName: 'Prepare SonarCloud'
+#   inputs:
+#     SonarCloud: 'SonarCloud'
+#     organization: 'repeat-committers'
+#     scannerMode: 'CLI'
+#     configMode: 'manual'
+#     cliProjectKey: 'inharmony-portal'
+#     cliProjectName: 'inHarmony'
+#     cliSources: $(solution)
+#     extraProperties: |
+#       sonar.exclusions= **/FrontEnd/src/vendor/**
+- task: NodeTool@0
   inputs:
-    packageType: 'sdk'
-    version: '5.0.x'
-    # performMultiLevelLookup: true
-    # includePreviewVersions: false # Required 'true' to use preview versions
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
 
-- task: UseDotNet@2
-  displayName: 'Install .NET Core Runtime'
+- task: Npm@1
+  displayName: 'NPM Install'
   inputs:
-    packageType: 'runtime'
-    version: '2.x'
-    # performMultiLevelLookup: true
+    command: 'install'
+    workingDir: $(solution)
 
-
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: Npm@1
+  displayName: 'NPM Install Angular CLI'
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'install -g @angular/cli@latest'
 
-#this must go before the 'build' task.
-- task: SonarCloudPrepare@1
+- task: Npm@1
+  displayName: 'NPM Build Angular'
   inputs:
-    SonarCloud: '03012021BatchServiceToken1'
-    organization: '03012021batch'
-    scannerMode: 'MSBuild'
-    projectKey: '03012021Batch_03012021BatchPipelineDemo'
-    projectName: '03012021BatchPipelineDemo'
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run build-prod'
 
-#this will restore and build the directory.
-- task: DotNetCoreCLI@2
-  displayName: 'building'
+- task: Npm@1
+  displayName: 'NPM Test'
   inputs:
-    command: 'build'
-    projects: 'Demos/JavaScriptWithDotnetAPI/memesaver/*.sln'
-    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
-    arguments: '--configuration $(buildConfiguration)'
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run test-headless'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: 'Demos/JavaScriptWithDotnetAPI/memesaver/memesaver.sln'
-    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
-    testRunTitle: 'Dotnet tests running'
-    workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
+# - task: SonarCloudAnalyze@1
+#   displayName: 'SonarCloud Analyze'
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '**/coburtura/coverage.xml'
+# - task: SonarCloudPublish@1
+#   displayName: 'SonarCloud Publish'
+#   inputs:
+#     pollingTimeoutSec: '300'
 
-- task: SonarCloudAnalyze@1
 
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
+# ArchiveFiles
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(solution)/dist'
+#     includeRootFolder: true
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+#     replaceExistingArchive: true
 
-- task: DotNetCoreCLI@2
-  displayName: 'Publishing'
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    # modifyOutputPath: false
-    # workingDirectory: 'Demos/JavaScriptWithDotnetAPI/memesaver'
-    projects: '$(solution)'
-    zipAfterPublish: true
+# Publish Artifacts
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     artifactName: 'dist'
+#     publishLocation: 'Container'
 
-- task: AzureRmWebAppDeployment@4
-  displayName: app service deploy
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(5d150957-9944-40b9-b9e9-2a32c983a1f8)'
-    appType: 'webApp'
-    WebAppName: 'memesaver'
-    ResourceGroupName: 'memesaverresourcegroup'
-    #SlotName: 'production'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(5d150957-9944-40b9-b9e9-2a32c983a1f8)'
-    appType: 'webApp'
-    WebAppName: 'memesaver'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+# # Send 
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: 'Azure subscription 1(177e072a-ef5e-4a5f-94f4-d006ea8b8575)'
+#     appType: 'webApp'
+#     WebAppName: 'inHarmony'
+#     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
