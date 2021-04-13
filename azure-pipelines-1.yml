@@ -1,0 +1,95 @@
+trigger:
+  branches:
+    include:
+    - main
+#the below is required only if you have multiple .sln files in your repo.
+  paths:
+    include:
+    - Demos/AngularDemo/memesaver
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Demos/AngularDemo/memesaver'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+# - task: SonarCloudPrepare@1
+#   displayName: 'Prepare SonarCloud'
+#   inputs:
+#     SonarCloud: 'SonarCloud'
+#     organization: 'repeat-committers'
+#     scannerMode: 'CLI'
+#     configMode: 'manual'
+#     cliProjectKey: 'inharmony-portal'
+#     cliProjectName: 'inHarmony'
+#     cliSources: $(solution)
+#     extraProperties: |
+#       sonar.exclusions= **/FrontEnd/src/vendor/**
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- task: Npm@1
+  displayName: 'NPM Install'
+  inputs:
+    command: 'install'
+    workingDir: $(solution)
+
+- task: Npm@1
+  displayName: 'NPM Install Angular CLI'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'install -g @angular/cli@latest'
+
+- task: Npm@1
+  displayName: 'NPM Build Angular'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run build-prod'
+
+- task: Npm@1
+  displayName: 'NPM Test'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run test-headless'
+
+# - task: SonarCloudAnalyze@1
+#   displayName: 'SonarCloud Analyze'
+
+# - task: SonarCloudPublish@1
+#   displayName: 'SonarCloud Publish'
+#   inputs:
+#     pollingTimeoutSec: '300'
+
+
+# ArchiveFiles
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(solution)/dist'
+#     includeRootFolder: true
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+#     replaceExistingArchive: true
+
+# Publish Artifacts
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     artifactName: 'dist'
+#     publishLocation: 'Container'
+
+# # Send 
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: 'Azure subscription 1(177e072a-ef5e-4a5f-94f4-d006ea8b8575)'
+#     appType: 'webApp'
+#     WebAppName: 'inHarmony'
+#     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
