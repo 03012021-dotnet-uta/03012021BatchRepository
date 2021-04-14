@@ -16,7 +16,18 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-
+- task: SonarCloudPrepare@1
+  displayName: sonarclour prepare
+  inputs:
+    SonarCloud: 'sonarclourangular'
+    organization: '03012021batch'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: '03012021Batch_memesaverangular'
+    cliProjectName: 'memesaverangular'
+    cliSources: '$(solution)'
+    extraProperties: 
+      sonar.exclusions= **/$(solution)/src/vendor/**
 
 
 # - task: SonarCloudPrepare@1
@@ -63,8 +74,16 @@ steps:
     workingDir: $(solution)
     customCommand: 'run test-headless'
 
+- task: SonarCloudAnalyze@1
+  displayName: 'SonarCloud Analyze'
+
 # - task: SonarCloudAnalyze@1
 #   displayName: 'SonarCloud Analyze'
+
+- task: SonarCloudPublish@1
+  displayName: 'SonarCloud Publish'
+  inputs:
+    pollingTimeoutSec: '300'
 
 # - task: SonarCloudPublish@1
 #   displayName: 'SonarCloud Publish'
