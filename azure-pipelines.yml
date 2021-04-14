@@ -16,6 +16,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+
+
 # - task: SonarCloudPrepare@1
 #   displayName: 'Prepare SonarCloud'
 #   inputs:
